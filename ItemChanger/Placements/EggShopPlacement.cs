@@ -4,6 +4,8 @@ using ItemChanger.Extensions;
 using ItemChanger.FsmStateActions;
 using ItemChanger.Locations;
 
+using static Shims.NET.System.Text.StringBuilder;
+
 namespace ItemChanger.Placements
 {
     /// <summary>
@@ -94,10 +96,11 @@ namespace ItemChanger.Placements
         {
             if (PurchasedAll) return;
 
+            // TODO: check if black wave exists
             // Set the "Black Wave" to white
-            Transform bw = jijiFsm.transform.Find("Black Wave");
-            bw.GetComponent<WaveEffectControl>().blackWave = false;
-            bw.GetComponent<SpriteRenderer>().color = Color.white;
+            //Transform bw = jijiFsm.transform.Find("Black Wave");
+            //bw.GetComponent<WaveEffectControl>().blackWave = false;
+            //bw.GetComponent<SpriteRenderer>().color = Color.white;
 
             FsmState convoChoice = jijiFsm.GetState("Convo Choice");
             FsmState greet = jijiFsm.GetState("Greet");
@@ -107,7 +110,7 @@ namespace ItemChanger.Placements
             FsmState spawn = jijiFsm.GetState("Spawn");
 
             convoChoice.SetActions(
-                convoChoice.Actions[1] // AudioPlayerOneShot, all other actions trigger alternate conversations
+                convoChoice.Actions[0] // AudioPlayerOneShot, all other actions trigger alternate conversations
             );
             convoChoice.AddTransition(FsmEvent.Finished, greet); // Always display the Jiji:GREET convo
 

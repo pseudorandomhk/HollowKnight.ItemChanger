@@ -232,6 +232,11 @@
         "disableState": null
       },
       {
+        "$type": "ItemChanger.Tags.DestroyObjectTag, ItemChanger",
+        "objectName": "Tut_tablet_top/Prompt Marker",
+        "sceneName": "Room_Final_Boss_Atrium"
+      },
+      {
         "$type": "ItemChanger.Tags.IncompatibilityWarningTag, ItemChanger",
         "IncompatiblePlacementName": "Lore_Tablet-World_Sense"
       }
@@ -305,7 +310,7 @@
     "elevation": 0.0,
     "forceShiny": true,
     "name": "Dream_Nail",
-    "sceneName": "Dream_Nailcollection",
+    "sceneName": "Dream_NailCollection",
     "flingType": "DirectDeposit",
     "tags": [
       {
@@ -318,18 +323,6 @@
         "deactivateNoCharms": true
       }
     ]
-  },
-  "Dream_Gate": {
-    "$type": "ItemChanger.Locations.CoordinateLocation, ItemChanger",
-    "x": 30.0,
-    "y": 10.0,
-    "elevation": 0.0,
-    "managed": false,
-    "forceShiny": false,
-    "name": "Dream_Gate",
-    "sceneName": "RestingGrounds_07",
-    "flingType": "Everywhere",
-    "tags": null
   },
   "Awoken_Dream_Nail": {
     "$type": "ItemChanger.Locations.CoordinateLocation, ItemChanger",
@@ -359,7 +352,7 @@
   "Shade_Soul": {
     "$type": "ItemChanger.Locations.SpecialLocations.ShadeSoulLocation, ItemChanger",
     "name": "Shade_Soul",
-    "sceneName": "Ruins1_31b",
+    "sceneName": "Ruins1_31",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -778,7 +771,7 @@
     "nonreplaceable": false,
     "elevation": -1.1,
     "name": "Quick_Slash",
-    "sceneName": "Deepnest_East_14b",
+    "sceneName": "Deepnest_East_14",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -870,105 +863,6 @@
     ],
     "HintActive": true
   },
-  "Dreamshield": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": "Shiny Item Stand",
-    "fsmName": "Shiny Control",
-    "containerType": "Shiny",
-    "nonreplaceable": false,
-    "elevation": 0.1,
-    "name": "Dreamshield",
-    "sceneName": "RestingGrounds_17",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Weaversong": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": "Shiny Item (1)",
-    "fsmName": "Shiny Control",
-    "containerType": "Shiny",
-    "nonreplaceable": false,
-    "elevation": -0.7,
-    "name": "Weaversong",
-    "sceneName": "Deepnest_45_v02",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Grimmchild": {
-    "$type": "ItemChanger.Locations.CoordinateLocation, ItemChanger",
-    "x": 75.0,
-    "y": 7.0,
-    "elevation": 0.6,
-    "managed": false,
-    "forceShiny": false,
-    "name": "Grimmchild",
-    "sceneName": "Grimm_Main_Tent",
-    "flingType": "Everywhere",
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.SetPDBoolOnLoadTag, ItemChanger",
-        "boolName": "metGrimm",
-        "value": true
-      }
-    ]
-  },
-  "Unbreakable_Heart": {
-    "$type": "ItemChanger.Locations.SpecialLocations.DivineLocation, ItemChanger",
-    "requiredCharmID": 23,
-    "shopSlot": "Heart",
-    "objectName": "Poo Heart",
-    "fsmName": "Shiny Control",
-    "containerType": "Shiny",
-    "nonreplaceable": false,
-    "elevation": -0.7,
-    "name": "Unbreakable_Heart",
-    "sceneName": "Grimm_Divine",
-    "flingType": "Everywhere",
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.UnsupportedContainerTag, ItemChanger",
-        "containerType": "Chest"
-      }
-    ]
-  },
-  "Unbreakable_Greed": {
-    "$type": "ItemChanger.Locations.SpecialLocations.DivineLocation, ItemChanger",
-    "requiredCharmID": 24,
-    "shopSlot": "Greed",
-    "objectName": "Poo Greed",
-    "fsmName": "Shiny Control",
-    "containerType": "Shiny",
-    "nonreplaceable": false,
-    "elevation": -0.7,
-    "name": "Unbreakable_Greed",
-    "sceneName": "Grimm_Divine",
-    "flingType": "Everywhere",
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.UnsupportedContainerTag, ItemChanger",
-        "containerType": "Chest"
-      }
-    ]
-  },
-  "Unbreakable_Strength": {
-    "$type": "ItemChanger.Locations.SpecialLocations.DivineLocation, ItemChanger",
-    "requiredCharmID": 25,
-    "shopSlot": "Strength",
-    "objectName": "Poo Strength",
-    "fsmName": "Shiny Control",
-    "containerType": "Shiny",
-    "nonreplaceable": false,
-    "elevation": -0.7,
-    "name": "Unbreakable_Strength",
-    "sceneName": "Grimm_Divine",
-    "flingType": "Everywhere",
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.UnsupportedContainerTag, ItemChanger",
-        "containerType": "Chest"
-      }
-    ]
-  },
   "City_Crest": {
     "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
     "objectName": "Shiny Item",
@@ -989,7 +883,7 @@
     "nonreplaceable": false,
     "elevation": -1.1,
     "name": "Tram_Pass",
-    "sceneName": "Deepnest_26b",
+    "sceneName": "Deepnest_26",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -1014,47 +908,6 @@
     "elevation": -1.2,
     "name": "Simple_Key-City",
     "sceneName": "Ruins1_17",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Simple_Key-Lurker": {
-    "$type": "ItemChanger.Locations.DualLocation, ItemChanger",
-    "Test": {
-      "$type": "ItemChanger.PDBool, ItemChanger",
-      "boolName": "killedPaleLurker"
-    },
-    "falseLocation": {
-      "$type": "ItemChanger.Locations.SpecialLocations.PaleLurkerDropLocation, ItemChanger",
-      "objectName": "Lurker Control\\Pale Lurker",
-      "removeGeo": false,
-      "managed": false,
-      "forceShiny": false,
-      "name": "Simple_Key-Lurker",
-      "sceneName": "GG_Lurker",
-      "flingType": "Everywhere",
-      "tags": [
-        {
-          "$type": "ItemChanger.Tags.DestroyFsmTag, ItemChanger",
-          "id": {
-            "FsmName": "Shiny Control",
-            "ObjectName": "Shiny Item Key"
-          },
-          "sceneName": "GG_Lurker"
-        }
-      ]
-    },
-    "trueLocation": {
-      "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-      "objectName": "Corpse Pale Lurker\\Shiny Item Key",
-      "elevation": 0.0,
-      "forceShiny": false,
-      "name": "Simple_Key-Lurker",
-      "sceneName": "GG_Lurker",
-      "flingType": "Everywhere",
-      "tags": null
-    },
-    "name": "Simple_Key-Lurker",
-    "sceneName": "GG_Lurker",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -1098,27 +951,6 @@
         "Enable": false
       }
     ]
-  },
-  "Godtuner": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GodtunerLocation, ItemChanger",
-    "objectName": "Shiny Item Godfinder",
-    "elevation": 0.0,
-    "forceShiny": false,
-    "name": "Godtuner",
-    "sceneName": "GG_Waterways",
-    "flingType": "Everywhere",
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.ImplicitCostTag, ItemChanger",
-        "Cost": {
-          "$type": "ItemChanger.ConsumablePDIntCost, ItemChanger",
-          "amount": 1,
-          "fieldName": "simpleKeys"
-        },
-        "Inherent": true
-      }
-    ],
-    "HintActive": true
   },
   "Collector's_Map": {
     "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
@@ -1388,27 +1220,6 @@
     "tags": null,
     "HintActive": true
   },
-  "Charm_Notch-Grimm": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": "Grimm Chest",
-    "fsmName": "Chest Control",
-    "containerType": "Chest",
-    "nonreplaceable": true,
-    "elevation": 0.0,
-    "name": "Charm_Notch-Grimm",
-    "sceneName": "Grimm_Main_Tent",
-    "flingType": "Everywhere",
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.DestroyFsmTag, ItemChanger",
-        "id": {
-          "ObjectName": "Charm Notch",
-          "FsmName": "Divine Charm Return"
-        },
-        "sceneName": "Town"
-      }
-    ]
-  },
   "Pale_Ore-Basin": {
     "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
     "objectName": "Shiny Item Stand",
@@ -1576,66 +1387,6 @@
     "elevation": 0.0,
     "name": "Geo_Chest-Weavers_Den",
     "sceneName": "Deepnest_45_v02",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Geo_Chest-Junk_Pit_1": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": "Chest",
-    "fsmName": "Chest Control",
-    "containerType": "Chest",
-    "nonreplaceable": true,
-    "elevation": 0.0,
-    "name": "Geo_Chest-Junk_Pit_1",
-    "sceneName": "GG_Waterways",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Geo_Chest-Junk_Pit_2": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": "Chest (1)",
-    "fsmName": "Chest Control",
-    "containerType": "Chest",
-    "nonreplaceable": true,
-    "elevation": 0.0,
-    "name": "Geo_Chest-Junk_Pit_2",
-    "sceneName": "GG_Waterways",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Geo_Chest-Junk_Pit_3": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": "Chest (2)",
-    "fsmName": "Chest Control",
-    "containerType": "Chest",
-    "nonreplaceable": true,
-    "elevation": 0.0,
-    "name": "Geo_Chest-Junk_Pit_3",
-    "sceneName": "GG_Waterways",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Geo_Chest-Junk_Pit_5": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": "Chest (4)",
-    "fsmName": "Chest Control",
-    "containerType": "Chest",
-    "nonreplaceable": true,
-    "elevation": 0.0,
-    "name": "Geo_Chest-Junk_Pit_5",
-    "sceneName": "GG_Waterways",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Lumafly_Escape-Junk_Pit_Chest_4": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": "Chest (3)",
-    "fsmName": "Chest Control",
-    "containerType": "Chest",
-    "nonreplaceable": true,
-    "elevation": 0.0,
-    "name": "Lumafly_Escape-Junk_Pit_Chest_4",
-    "sceneName": "GG_Waterways",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -1843,7 +1594,7 @@
     "nonreplaceable": false,
     "elevation": -1.2,
     "name": "Rancid_Egg-City_of_Tears_Left",
-    "sceneName": "Ruins1_05c",
+    "sceneName": "Ruins1_05",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -2569,18 +2320,6 @@
     "flingType": "Everywhere",
     "tags": null
   },
-  "King's_Idol-Pale_Lurker": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": "Shiny Item",
-    "fsmName": "Shiny Control",
-    "containerType": "Shiny",
-    "nonreplaceable": false,
-    "elevation": -1.2,
-    "name": "King's_Idol-Pale_Lurker",
-    "sceneName": "GG_Lurker",
-    "flingType": "Everywhere",
-    "tags": null
-  },
   "King's_Idol-Deepnest": {
     "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
     "objectName": "Shiny Item",
@@ -2777,7 +2516,7 @@
     "fsmName": "Conversation Control",
     "objName": "Ghost Warrior NPC",
     "name": "Boss_Essence-Xero",
-    "sceneName": "RestingGrounds_02_boss",
+    "sceneName": "RestingGrounds_02",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -2787,7 +2526,7 @@
     "fsmName": "Conversation Control",
     "objName": "Ghost Warrior NPC",
     "name": "Boss_Essence-Gorb",
-    "sceneName": "Cliffs_02_boss",
+    "sceneName": "Cliffs_02",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -2797,7 +2536,7 @@
     "fsmName": "Conversation Control",
     "objName": "Ghost Warrior NPC",
     "name": "Boss_Essence-Marmu",
-    "sceneName": "Fungus3_40_boss",
+    "sceneName": "Fungus3_40",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -2847,7 +2586,7 @@
     "fsmName": "Conversation Control",
     "objName": "Ghost Mage Lord NPC",
     "name": "Boss_Essence-Soul_Tyrant",
-    "sceneName": "Ruins1_24_boss_defeated",
+    "sceneName": "Ruins1_24",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -2860,27 +2599,6 @@
     "sceneName": "Abyss_19",
     "flingType": "Everywhere",
     "tags": null
-  },
-  "Boss_Essence-White_Defender": {
-    "$type": "ItemChanger.Locations.SpecialLocations.DreamBossLocation, ItemChanger",
-    "playerDataBool": "whiteDefenderOrbsCollected",
-    "fsmName": "Award Orbs",
-    "objName": "Dung Defender_Sleep",
-    "name": "Boss_Essence-White_Defender",
-    "sceneName": "Waterways_15",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Boss_Essence-Grey_Prince_Zote": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GreyPrinceZoteLocation, ItemChanger",
-    "playerDataBool": "greyPrinceOrbsCollected",
-    "fsmName": "Award Orbs",
-    "objName": "Dream Enter",
-    "name": "Boss_Essence-Grey_Prince_Zote",
-    "sceneName": "Room_Bretta_Basement",
-    "flingType": "Everywhere",
-    "tags": null,
-    "HintActive": true
   },
   "Grub-Crossroads_Acid": {
     "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
@@ -3812,22 +3530,10 @@
     "flingType": "Everywhere",
     "tags": null
   },
-  "Hidden_Station_Stag": {
-    "$type": "ItemChanger.Locations.SpecialLocations.StagLocation, ItemChanger",
-    "x": 28.0,
-    "y": 6.4,
-    "elevation": 0.0,
-    "managed": false,
-    "forceShiny": false,
-    "name": "Hidden_Station_Stag",
-    "sceneName": "Abyss_22",
-    "flingType": "Everywhere",
-    "tags": null
-  },
   "Stag_Nest_Stag": {
-    "$type": "ItemChanger.Locations.CoordinateLocation, ItemChanger",
-    "x": 19.3,
-    "y": 6.3,
+    "$type": "ItemChanger.Locations.SpecialLocations.StagLocation, ItemChanger",
+    "x": 19.9,
+    "y": 6.4,
     "elevation": 0.0,
     "managed": false,
     "forceShiny": false,
@@ -3913,85 +3619,6 @@
     "forceShiny": false,
     "name": "Lifeblood_Cocoon-Kingdom's_Edge",
     "sceneName": "Deepnest_East_15",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Grimmkin_Flame-City_Storerooms": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GrimmkinLocation, ItemChanger",
-    "grimmkinLevel": 1,
-    "name": "Grimmkin_Flame-City_Storerooms",
-    "sceneName": "Ruins1_28",
-    "flingType": "DirectDeposit",
-    "tags": null
-  },
-  "Grimmkin_Flame-Greenpath": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GrimmkinLocation, ItemChanger",
-    "grimmkinLevel": 1,
-    "name": "Grimmkin_Flame-Greenpath",
-    "sceneName": "Fungus1_10",
-    "flingType": "DirectDeposit",
-    "tags": null
-  },
-  "Grimmkin_Flame-Crystal_Peak": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GrimmkinLocation, ItemChanger",
-    "grimmkinLevel": 1,
-    "name": "Grimmkin_Flame-Crystal_Peak",
-    "sceneName": "Mines_10",
-    "flingType": "DirectDeposit",
-    "tags": null
-  },
-  "Grimmkin_Flame-King's_Pass": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GrimmkinLocation, ItemChanger",
-    "grimmkinLevel": 2,
-    "name": "Grimmkin_Flame-King's_Pass",
-    "sceneName": "Tutorial_01",
-    "flingType": "DirectDeposit",
-    "tags": null
-  },
-  "Grimmkin_Flame-Resting_Grounds": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GrimmkinLocation, ItemChanger",
-    "grimmkinLevel": 2,
-    "name": "Grimmkin_Flame-Resting_Grounds",
-    "sceneName": "RestingGrounds_06",
-    "flingType": "DirectDeposit",
-    "tags": null
-  },
-  "Grimmkin_Flame-Kingdom's_Edge": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GrimmkinLocation, ItemChanger",
-    "grimmkinLevel": 2,
-    "name": "Grimmkin_Flame-Kingdom's_Edge",
-    "sceneName": "Deepnest_East_03",
-    "flingType": "DirectDeposit",
-    "tags": null
-  },
-  "Grimmkin_Flame-Fungal_Core": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GrimmkinLocation, ItemChanger",
-    "grimmkinLevel": 3,
-    "name": "Grimmkin_Flame-Fungal_Core",
-    "sceneName": "Fungus2_30",
-    "flingType": "DirectDeposit",
-    "tags": null
-  },
-  "Grimmkin_Flame-Ancient_Basin": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GrimmkinLocation, ItemChanger",
-    "grimmkinLevel": 3,
-    "name": "Grimmkin_Flame-Ancient_Basin",
-    "sceneName": "Abyss_02",
-    "flingType": "DirectDeposit",
-    "tags": null
-  },
-  "Grimmkin_Flame-Hive": {
-    "$type": "ItemChanger.Locations.SpecialLocations.GrimmkinLocation, ItemChanger",
-    "grimmkinLevel": 3,
-    "name": "Grimmkin_Flame-Hive",
-    "sceneName": "Hive_03",
-    "flingType": "DirectDeposit",
-    "tags": null
-  },
-  "Grimmkin_Flame-Brumm": {
-    "$type": "ItemChanger.Locations.SpecialLocations.BrummFlameLocation, ItemChanger",
-    "name": "Grimmkin_Flame-Brumm",
-    "sceneName": "Room_spider_small",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -4119,14 +3746,6 @@
       }
     ],
     "HintActive": false
-  },
-  "Journal_Entry-Seal_of_Binding": {
-    "$type": "ItemChanger.Locations.SpecialLocations.SealOfBindingLocation, ItemChanger",
-    "objectName": "End Scene",
-    "name": "Journal_Entry-Seal_of_Binding",
-    "sceneName": "White_Palace_20",
-    "flingType": "DirectDeposit",
-    "tags": null
   },
   "Elevator_Pass": {
     "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
@@ -5759,26 +5378,6 @@
     "flingType": "Everywhere",
     "tags": null
   },
-  "Geo_Rock-Pale_Lurker": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Geo Rock Outskirts",
-    "elevation": -0.9,
-    "forceShiny": false,
-    "name": "Geo_Rock-Pale_Lurker",
-    "sceneName": "GG_Lurker",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Geo_Rock-Godhome_Pipeway": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Geo Rock City 1",
-    "elevation": 0.1,
-    "forceShiny": false,
-    "name": "Geo_Rock-Godhome_Pipeway",
-    "sceneName": "GG_Pipeway",
-    "flingType": "Everywhere",
-    "tags": null
-  },
   "Geo_Rock-Hive_Entrance": {
     "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
     "objectName": "Geo Rock Hive",
@@ -6119,26 +5718,6 @@
     "flingType": "Everywhere",
     "tags": null
   },
-  "Geo_Rock-Fluke_Hermit_Dupe": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Geo Rock Fung 02 (1)",
-    "elevation": -0.3,
-    "forceShiny": false,
-    "name": "Geo_Rock-Fluke_Hermit_Dupe",
-    "sceneName": "Room_GG_Shortcut",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Geo_Rock-Fluke_Hermit": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Geo Rock Fung 01",
-    "elevation": -0.3,
-    "forceShiny": false,
-    "name": "Geo_Rock-Fluke_Hermit",
-    "sceneName": "Room_GG_Shortcut",
-    "flingType": "Everywhere",
-    "tags": null
-  },
   "Geo_Rock-Pleasure_House": {
     "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
     "objectName": "Geo Rock City 1",
@@ -6175,7 +5754,7 @@
     "elevation": 0.001,
     "forceShiny": false,
     "name": "Geo_Rock-City_of_Tears_Above_Lemm",
-    "sceneName": "Ruins1_05c",
+    "sceneName": "Ruins1_05",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -6437,7 +6016,7 @@
       "managed": false,
       "forceShiny": false,
       "name": "Boss_Geo-Elegant_Soul_Warrior",
-      "sceneName": "Ruins1_31b",
+      "sceneName": "Ruins1_31",
       "flingType": "Everywhere",
       "tags": null
     },
@@ -6449,12 +6028,12 @@
       "managed": false,
       "forceShiny": false,
       "name": "Boss_Geo-Elegant_Soul_Warrior",
-      "sceneName": "Ruins1_31b",
+      "sceneName": "Ruins1_31",
       "flingType": "Everywhere",
       "tags": null
     },
     "name": "Boss_Geo-Elegant_Soul_Warrior",
-    "sceneName": "Ruins1_31b",
+    "sceneName": "Ruins1_31",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -7101,86 +6680,6 @@
     "forceShiny": false,
     "name": "Soul_Totem-White_Palace_Right",
     "sceneName": "White_Palace_15",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Soul_Totem-Path_of_Pain_Below_Lever": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Soul Totem white_Infinte",
-    "elevation": 1.5,
-    "forceShiny": false,
-    "name": "Soul_Totem-Path_of_Pain_Below_Lever",
-    "sceneName": "White_Palace_17",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Soul_Totem-Path_of_Pain_Left_of_Lever": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Soul Totem white_Infinte (3)",
-    "elevation": 1.4,
-    "forceShiny": false,
-    "name": "Soul_Totem-Path_of_Pain_Left_of_Lever",
-    "sceneName": "White_Palace_17",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Soul_Totem-Path_of_Pain_Entrance": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Soul Totem white_Infinte (1)",
-    "elevation": 1.5,
-    "forceShiny": false,
-    "name": "Soul_Totem-Path_of_Pain_Entrance",
-    "sceneName": "White_Palace_18",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Soul_Totem-Path_of_Pain_Second": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Soul Totem white_Infinte",
-    "elevation": 1.6,
-    "forceShiny": false,
-    "name": "Soul_Totem-Path_of_Pain_Second",
-    "sceneName": "White_Palace_18",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Soul_Totem-Path_of_Pain_Hidden": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Soul Totem white_Infinte (1)",
-    "elevation": 1.4,
-    "forceShiny": false,
-    "name": "Soul_Totem-Path_of_Pain_Hidden",
-    "sceneName": "White_Palace_19",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Soul_Totem-Path_of_Pain_Below_Thornskip": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Soul Totem white_Infinte",
-    "elevation": 1.5,
-    "forceShiny": false,
-    "name": "Soul_Totem-Path_of_Pain_Below_Thornskip",
-    "sceneName": "White_Palace_19",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Soul_Totem-Path_of_Pain_Final": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Soul Totem white_Infinte (2)",
-    "elevation": 1.5,
-    "forceShiny": false,
-    "name": "Soul_Totem-Path_of_Pain_Final",
-    "sceneName": "White_Palace_20",
-    "flingType": "Everywhere",
-    "tags": null
-  },
-  "Soul_Totem-Pale_Lurker": {
-    "$type": "ItemChanger.Locations.ObjectLocation, ItemChanger",
-    "objectName": "Soul Totem 3",
-    "elevation": 0.2,
-    "forceShiny": false,
-    "name": "Soul_Totem-Pale_Lurker",
-    "sceneName": "GG_Lurker",
     "flingType": "Everywhere",
     "tags": null
   },
@@ -7900,26 +7399,6 @@
         "$type": "ItemChanger.Tags.DestroyOnECLReplaceTag, ItemChanger",
         "objectPath": "Glow Response floor_ring large2 (1)",
         "sceneName": "White_Palace_09"
-      }
-    ],
-    "HintActive": false
-  },
-  "Lore_Tablet-Path_of_Pain_Entrance": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": null,
-    "fsmName": "inspect_region",
-    "replacePath": null,
-    "elevation": 0.0,
-    "containerType": "Tablet",
-    "nonreplaceable": false,
-    "name": "Lore_Tablet-Path_of_Pain_Entrance",
-    "sceneName": "White_Palace_18",
-    "flingType": "Everywhere",
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.DestroyOnECLReplaceTag, ItemChanger",
-        "objectPath": "wp_plaque_new",
-        "sceneName": "White_Palace_18"
       }
     ],
     "HintActive": false

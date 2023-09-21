@@ -1,4 +1,5 @@
-﻿using HutongGames.PlayMaker.Actions;
+﻿#if FALSE
+using HutongGames.PlayMaker.Actions;
 using ItemChanger.Extensions;
 using ItemChanger.FsmStateActions;
 using ItemChanger.Internal;
@@ -210,7 +211,7 @@ namespace ItemChanger.Locations.SpecialLocations
                     .Select(fi => fi.Value).ToList();
                 if (charmIDs.Count != 0)
                 {
-                    text += string.Format(Language.Language.Get("DIVINE_NO_CHARM", "Fmt"), string.Join(Language.Language.Get("COMMA_AND", "IC"), charmIDs.Select(i => CharmNameUtil.GetCharmName(i))));
+                    text += string.Format(Language.Language.Get("DIVINE_NO_CHARM", "Fmt"), string.Join(Language.Language.Get("COMMA_AND", "IC"), charmIDs.Select(i => CharmNameUtil.GetCharmName(i)).ToArray()));
                 }
                 DialogueCenter.StartConversation(text);
             }), 0);
@@ -329,3 +330,4 @@ namespace ItemChanger.Locations.SpecialLocations
         */
     }
 }
+#endif

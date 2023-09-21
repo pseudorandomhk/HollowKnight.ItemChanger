@@ -594,65 +594,6 @@
       {
         "$type": "ItemChanger.Tags.ItemChainTag, ItemChanger",
         "predecessor": null,
-        "successor": "Dream_Gate"
-      }
-    ],
-    "obtainState": "Unobtained"
-  },
-  "Dream_Gate": {
-    "$type": "ItemChanger.Items.BoolItem, ItemChanger",
-    "fieldName": "hasDreamGate",
-    "setValue": true,
-    "name": "Dream_Gate",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.BigUIDef, ItemChanger",
-      "bigSprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Prompts.Dream Gate"
-      },
-      "take": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "GET_ITEM_INTRO5",
-        "sheet": "Prompts"
-      },
-      "press": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "BUTTON_DESC_HOLD",
-        "sheet": "Prompts"
-      },
-      "buttonSkin": {
-        "$type": "ItemChanger.UIDefs.HeroActionButtonSkin, ItemChanger",
-        "button": "DREAM_NAIL"
-      },
-      "descOne": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "GET_DREAMGATE_1",
-        "sheet": "Prompts"
-      },
-      "descTwo": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "GET_DREAMGATE_2",
-        "sheet": "Prompts"
-      },
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "INV_NAME_DREAMGATE",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "INV_DESC_DREAMGATE",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Dreamnail"
-      }
-    },
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.ItemChainTag, ItemChanger",
-        "predecessor": "Dream_Nail",
         "successor": "Awoken_Dream_Nail"
       }
     ],
@@ -711,7 +652,7 @@
     "tags": [
       {
         "$type": "ItemChanger.Tags.ItemChainTag, ItemChanger",
-        "predecessor": "Dream_Gate",
+        "predecessor": "Dream_Nail",
         "successor": null
       }
     ],
@@ -1955,36 +1896,6 @@
     ],
     "obtainState": "Unobtained"
   },
-  "Unbreakable_Heart": {
-    "$type": "ItemChanger.Items.UnbreakableCharmItem, ItemChanger",
-    "charmNum": 23,
-    "name": "Unbreakable_Heart",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_NAME_23_G",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_DESC_23_G",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Charms.23_G"
-      }
-    },
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.ItemChainTag, ItemChanger",
-        "predecessor": "Fragile_Heart",
-        "successor": null
-      }
-    ],
-    "obtainState": "Unobtained"
-  },
   "Fragile_Greed": {
     "$type": "ItemChanger.Items.CharmItem, ItemChanger",
     "charmNum": 24,
@@ -2045,36 +1956,6 @@
     ],
     "obtainState": "Unobtained"
   },
-  "Unbreakable_Greed": {
-    "$type": "ItemChanger.Items.UnbreakableCharmItem, ItemChanger",
-    "charmNum": 24,
-    "name": "Unbreakable_Greed",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_NAME_24_G",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_DESC_24_G",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Charms.24_G"
-      }
-    },
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.ItemChainTag, ItemChanger",
-        "predecessor": "Fragile_Greed",
-        "successor": null
-      }
-    ],
-    "obtainState": "Unobtained"
-  },
   "Fragile_Strength": {
     "$type": "ItemChanger.Items.CharmItem, ItemChanger",
     "charmNum": 25,
@@ -2131,36 +2012,6 @@
       {
         "$type": "ItemChanger.Tags.PersistentItemTag, ItemChanger",
         "Persistence": "Persistent"
-      }
-    ],
-    "obtainState": "Unobtained"
-  },
-  "Unbreakable_Strength": {
-    "$type": "ItemChanger.Items.UnbreakableCharmItem, ItemChanger",
-    "charmNum": 25,
-    "name": "Unbreakable_Strength",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_NAME_25_G",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_DESC_25_G",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Charms.25_G"
-      }
-    },
-    "tags": [
-      {
-        "$type": "ItemChanger.Tags.ItemChainTag, ItemChanger",
-        "predecessor": "Fragile_Strength",
-        "successor": null
       }
     ],
     "obtainState": "Unobtained"
@@ -2577,126 +2428,6 @@
     ],
     "obtainState": "Unobtained"
   },
-  "Sprintmaster": {
-    "$type": "ItemChanger.Items.CharmItem, ItemChanger",
-    "charmNum": 37,
-    "name": "Sprintmaster",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_NAME_37",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_DESC_37",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Charms.37"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Dreamshield": {
-    "$type": "ItemChanger.Items.CharmItem, ItemChanger",
-    "charmNum": 38,
-    "name": "Dreamshield",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_NAME_38",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_DESC_38",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Charms.38"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Weaversong": {
-    "$type": "ItemChanger.Items.CharmItem, ItemChanger",
-    "charmNum": 39,
-    "name": "Weaversong",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_NAME_39",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_DESC_39",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Charms.39"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Grimmchild1": {
-    "$type": "ItemChanger.Items.Grimmchild1Item, ItemChanger",
-    "charmNum": 40,
-    "name": "Grimmchild1",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_NAME_40",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "UI",
-        "sheet": "CHARM_DESC_40"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Charms.40"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Grimmchild2": {
-    "$type": "ItemChanger.Items.Grimmchild2Item, ItemChanger",
-    "charmNum": 40,
-    "name": "Grimmchild2",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_NAME_40",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "CHARM_DESC_40",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Charms.40"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
   "City_Crest": {
     "$type": "ItemChanger.Items.BoolItem, ItemChanger",
     "fieldName": "hasCityKey",
@@ -2913,52 +2644,6 @@
       "sprite": {
         "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
         "key": "ShopIcons.KingsBrand"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Godtuner": {
-    "$type": "ItemChanger.Items.BoolItem, ItemChanger",
-    "fieldName": "hasGodfinder",
-    "setValue": true,
-    "name": "Godtuner",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.BigUIDef, ItemChanger",
-      "bigSprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "Prompts.Godfinder"
-      },
-      "take": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "GET_ITEM_INTRO5",
-        "sheet": "Prompts"
-      },
-      "press": null,
-      "buttonSkin": null,
-      "descOne": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "GET_GODFINDER_1",
-        "sheet": "CP3"
-      },
-      "descTwo": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "GET_GODFINDER_2",
-        "sheet": "CP3"
-      },
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "INV_NAME_GODFINDER",
-        "sheet": "CP3"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "INV_DESC_GODFINDER",
-        "sheet": "CP3"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Godfinder"
       }
     },
     "tags": null,
@@ -3395,123 +3080,6 @@
       "sprite": {
         "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
         "key": "ShopIcons.Geo"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Geo_Chest-Junk_Pit_1": {
-    "$type": "ItemChanger.Items.SpawnGeoItem, ItemChanger",
-    "amount": 8,
-    "name": "Geo_Chest-Junk_Pit_1",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_NAME_GEO_8",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_DESC_GEO",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Geo"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Geo_Chest-Junk_Pit_2": {
-    "$type": "ItemChanger.Items.SpawnGeoItem, ItemChanger",
-    "amount": 8,
-    "name": "Geo_Chest-Junk_Pit_2",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_NAME_GEO_8",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_DESC_GEO",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Geo"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Geo_Chest-Junk_Pit_3": {
-    "$type": "ItemChanger.Items.SpawnGeoItem, ItemChanger",
-    "amount": 25,
-    "name": "Geo_Chest-Junk_Pit_3",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_NAME_GEO_25",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_DESC_GEO",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Geo"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Geo_Chest-Junk_Pit_5": {
-    "$type": "ItemChanger.Items.SpawnGeoItem, ItemChanger",
-    "amount": 10,
-    "name": "Geo_Chest-Junk_Pit_5",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_NAME_GEO_10",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_DESC_GEO",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Geo"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Lumafly_Escape": {
-    "$type": "ItemChanger.Items.SpawnLumafliesItem, ItemChanger",
-    "name": "Lumafly_Escape",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.BoxedString, ItemChanger",
-        "Value": "Nothing?"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.BoxedString, ItemChanger",
-        "Value": "But is it really nothing though?"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.LampBug"
       }
     },
     "tags": null,
@@ -4262,54 +3830,6 @@
     "tags": null,
     "obtainState": "Unobtained"
   },
-  "Boss_Essence-White_Defender": {
-    "$type": "ItemChanger.Items.EssenceItem, ItemChanger",
-    "amount": 300,
-    "name": "Boss_Essence-White_Defender",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_NAME_ESSENCE_300",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_DESC_ESSENCE",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Essence"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Boss_Essence-Grey_Prince_Zote": {
-    "$type": "ItemChanger.Items.EssenceItem, ItemChanger",
-    "amount": 300,
-    "name": "Boss_Essence-Grey_Prince_Zote",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_NAME_ESSENCE_300",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_DESC_ESSENCE",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Essence"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
   "Grub": {
     "$type": "ItemChanger.Items.GrubItem, ItemChanger",
     "name": "Grub",
@@ -4574,102 +4094,6 @@
       "sprite": {
         "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
         "key": "ShopIcons.HotSpringPin"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Scarab_Marker": {
-    "$type": "ItemChanger.Items.MapMarkerItem, ItemChanger",
-    "fieldName": "hasMarker_b",
-    "name": "Scarab_Marker",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "MARKER_B_NAME",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "MARKER_B_DESC",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Marker_B"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Shell_Marker": {
-    "$type": "ItemChanger.Items.MapMarkerItem, ItemChanger",
-    "fieldName": "hasMarker_r",
-    "name": "Shell_Marker",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "MARKER_R_NAME",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "MARKER_R_DESC",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Marker_R"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Token_Marker": {
-    "$type": "ItemChanger.Items.MapMarkerItem, ItemChanger",
-    "fieldName": "hasMarker_y",
-    "name": "Token_Marker",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "MARKER_Y_NAME",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "MARKER_Y_DESC",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Marker_Y"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Gleaming_Marker": {
-    "$type": "ItemChanger.Items.MapMarkerItem, ItemChanger",
-    "fieldName": "hasMarker_w",
-    "name": "Gleaming_Marker",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "MARKER_W_NAME",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "MARKER_W_DESC",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Marker_W"
       }
     },
     "tags": null,
@@ -5202,30 +4626,6 @@
     "tags": null,
     "obtainState": "Unobtained"
   },
-  "Hidden_Station_Stag": {
-    "$type": "ItemChanger.Items.StagItem, ItemChanger",
-    "fieldName": "openedHiddenStation",
-    "name": "Hidden_Station_Stag",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_STAG_NAME_HIDDENSTATION",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_STAG_DESC",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.StagPin"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
   "Stag_Nest_Stag": {
     "$type": "ItemChanger.Items.BoolItem, ItemChanger",
     "fieldName": "openedStagNest",
@@ -5307,36 +4707,6 @@
         "Persistence": "SemiPersistent"
       }
     ],
-    "obtainState": "Unobtained"
-  },
-  "Grimmkin_Flame": {
-    "$type": "ItemChanger.Items.IntItem, ItemChanger",
-    "fieldName": "flamesCollected",
-    "amount": 1,
-    "name": "Grimmkin_Flame",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.SplitUIDef, ItemChanger",
-      "preview": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_NAME_GRIMMKIN_FLAME",
-        "sheet": "UI"
-      },
-      "name": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_POSTVIEW_GRIMMKIN_FLAME",
-        "sheet": "UI"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "ITEMCHANGER_DESC_GRIMMKIN_FLAME",
-        "sheet": "UI"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Flame"
-      }
-    },
-    "tags": null,
     "obtainState": "Unobtained"
   },
   "Hunter's_Journal": {
@@ -5473,29 +4843,6 @@
       "shopDesc": {
         "$type": "ItemChanger.PaywallString, ItemChanger",
         "key": "NOTE_BIG_CENTIPEDE",
-        "sheet": "Journal"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.JournalEntry"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Journal_Entry-Seal_of_Binding": {
-    "$type": "ItemChanger.Items.JournalEntryItem, ItemChanger",
-    "playerDataName": "BindingSeal",
-    "name": "Journal_Entry-Seal_of_Binding",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.MsgUIDef, ItemChanger",
-      "name": {
-        "$type": "ItemChanger.BoxedString, ItemChanger",
-        "Value": "Seal of Binding Journal Entry"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.PaywallString, ItemChanger",
-        "key": "DESC_KIN_SEAL",
         "sheet": "Journal"
       },
       "sprite": {
@@ -6868,6 +6215,7 @@
     ],
     "obtainState": "Unobtained"
   },
+  // shouldn't exist, special case hard-coded in
   "Soul_Totem-Path_of_Pain": {
     "$type": "ItemChanger.Items.SoulTotemItem, ItemChanger",
     "hitCount": -1,
@@ -7841,36 +7189,6 @@
         "$type": "ItemChanger.LanguageString, ItemChanger",
         "key": "WP_THRONE_01",
         "sheet": "Lore Tablets"
-      },
-      "textType": "Lore",
-      "name": {
-        "$type": "ItemChanger.BoxedString, ItemChanger",
-        "Value": "Lore"
-      },
-      "shopDesc": {
-        "$type": "ItemChanger.BoxedString, ItemChanger",
-        "Value": "What secrets could lie on this tablet?"
-      },
-      "sprite": {
-        "$type": "ItemChanger.ItemChangerSprite, ItemChanger",
-        "key": "ShopIcons.Lore"
-      }
-    },
-    "tags": null,
-    "obtainState": "Unobtained"
-  },
-  "Lore_Tablet-Path_of_Pain_Entrance": {
-    "$type": "ItemChanger.Items.LoreItem, ItemChanger",
-    "loreSheet": "CP2",
-    "loreKey": "PLAQUE_WARN",
-    "textType": "Lore",
-    "name": "Lore_Tablet-Path_of_Pain_Entrance",
-    "UIDef": {
-      "$type": "ItemChanger.UIDefs.LoreUIDef, ItemChanger",
-      "lore": {
-        "$type": "ItemChanger.LanguageString, ItemChanger",
-        "key": "PLAQUE_WARN",
-        "sheet": "CP2"
       },
       "textType": "Lore",
       "name": {

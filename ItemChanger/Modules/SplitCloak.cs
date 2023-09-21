@@ -106,8 +106,8 @@ namespace ItemChanger.Modules
             {
                 return Direction.downward;
             }
-            if (hc.wallSlidingL) return Direction.rightward;
-            else if (hc.wallSlidingR) return Direction.leftward;
+            if (ReflectionHelper.GetField<HeroController, bool>(hc, "wallSlidingL")) return Direction.rightward;
+            else if (ReflectionHelper.GetField<HeroController, bool>(hc, "wallSlidingR")) return Direction.leftward;
             else if (input.inputActions.right.IsPressed) return Direction.rightward;
             else if (input.inputActions.left.IsPressed) return Direction.leftward;
             else if (hc.cState.facingRight) return Direction.rightward;

@@ -22,18 +22,18 @@ namespace ItemChanger.Modules
 
             for (int i = 0; i < 10; i++)
             {
-                GameObject newHopper1 = UObject.Instantiate(hopper1, hopper1.transform.parent);
-                GameObject newHopper2 = UObject.Instantiate(hopper2, hopper2.transform.parent);
+                GameObject newHopper1 = (GameObject)UObject.Instantiate(hopper1, hopper1.transform.parent);
+                GameObject newHopper2 = (GameObject)UObject.Instantiate(hopper2, hopper2.transform.parent);
 
-                HealthManager hopper1HM = newHopper1.GetComponent<HealthManager>();
-                hopper1HM.SetGeoSmall(0);
-                hopper1HM.SetGeoMedium(0);
-                hopper1HM.SetGeoLarge(0);
+                PlayMakerFSM hopper1HM = newHopper1.LocateMyFSM("heatlh_manager_enemy");
+                hopper1HM.FsmVariables.GetFsmInt("Geo Small").Value = 0;
+                hopper1HM.FsmVariables.GetFsmInt("Geo Medium").Value = 0;
+                hopper1HM.FsmVariables.GetFsmInt("Geo Large").Value = 0;
 
-                HealthManager hopper2HM = newHopper2.GetComponent<HealthManager>();
-                hopper2HM.SetGeoSmall(0);
-                hopper2HM.SetGeoMedium(0);
-                hopper2HM.SetGeoLarge(0);
+                PlayMakerFSM hopper2HM = newHopper1.LocateMyFSM("heatlh_manager_enemy");
+                hopper2HM.FsmVariables.GetFsmInt("Geo Small").Value = 0;
+                hopper2HM.FsmVariables.GetFsmInt("Geo Medium").Value = 0;
+                hopper2HM.FsmVariables.GetFsmInt("Geo Large").Value = 0;
 
                 Vector3 hopper1Pos = newHopper1.transform.localPosition;
                 hopper1Pos = new Vector3(

@@ -4,6 +4,8 @@ using ItemChanger.FsmStateActions;
 using ItemChanger.Internal;
 using ItemChanger.Extensions;
 
+using static Shims.NET.System.Linq.Enumerable;
+
 namespace ItemChanger.Util
 {
     public static class TabletUtility
@@ -58,21 +60,20 @@ namespace ItemChanger.Util
                     promptUp.Actions[0], // AudioStop
                     promptUp.Actions[1], // TurnToBG
                     promptUp.Actions[2], // lore tablet audio clip
-                    promptUp.Actions[3], // vibration
+                    promptUp.Actions[3], // sendeventbyname BOX UP
                     //promptUp.Actions[4], // change text align
                     //promptUp.Actions[5], // move text
                     //promptUp.Actions[6], // HUD Canvas OUT
                     //promptUp.Actions[7], // LORE PROMPT UP
+                    promptUp.Actions[8], // wait
                     new AsyncLambda(callback => DialogueCenter.SendLoreMessage(
                         textGenerator?.Invoke() ?? string.Empty,
                         callback,
                         TextType.MajorLore), "CONVO_FINISH")
             );
-            FsmState setBool = inspectFsm.GetState("Set Bool");
             FsmState turnBack = inspectFsm.GetState("Turn Back");
             promptUp.ClearTransitions();
             promptUp.AddTransition("CONVO_FINISH", turnBack);
-            foreach (var t in setBool.Transitions) t.SetToState(turnBack);
 
             return tablet;
         }
@@ -118,11 +119,12 @@ namespace ItemChanger.Util
                     promptUp.Actions[0], // AudioStop
                     promptUp.Actions[1], // TurnToBG
                     promptUp.Actions[2], // lore tablet audio clip
-                    promptUp.Actions[3], // vibration
+                    promptUp.Actions[3], // SendEventByName BOX UP
                     //promptUp.Actions[4], // change text align
                     //promptUp.Actions[5], // move text
                     //promptUp.Actions[6], // HUD Canvas OUT
-                    //promptUp.Actions[7], // LORE PROMPT UP
+                    //promptUp.Actions[7], // LORE PROMPT UP,
+                    promptUp.Actions[8], // wait
                     new AsyncLambda(callback => ItemUtility.GiveSequentially(items, placement, new GiveInfo
                     {
                         FlingType = flingType,
@@ -131,45 +133,15 @@ namespace ItemChanger.Util
                         Transform = inspectFsm.transform,
                     }, callback), "CONVO_FINISH")
                 );
-                FsmState setBool = inspectFsm.GetState("Set Bool");
                 FsmState turnBack = inspectFsm.GetState("Turn Back");
                 promptUp.ClearTransitions();
                 promptUp.AddTransition("CONVO_FINISH", turnBack);
 
-                // the abyss tablet doesn't have the hero damaged behavior, so we add it back in for consistency
-                if (setBool == null)
-                {
-                    if (inspectFsm.FsmVariables.FindFsmBool("Hero Damaged") is not FsmBool heroDamaged)
-                    {
-                        heroDamaged = inspectFsm.AddFsmBool("Hero Damaged", false);
-                    }
-                    turnBack.AddFirstAction(new BoolTest
-                    {
-                        boolVariable = heroDamaged,
-                        isFalse = null,
-                        isTrue = FsmEvent.Finished,
-                    });
-                    setBool = new FsmState(inspectFsm.Fsm)
-                    {
-                        Name = "Set Bool",
-                        Transitions = new FsmTransition[] { new FsmTransition { FsmEvent = FsmEvent.Finished, ToFsmState = inspectFsm.GetState("Down"), ToState = "Down", } },
-                    };
-                    setBool.SetActions(
-                        new SetBoolValue { boolVariable = heroDamaged, boolValue = true }
-                    );
-                    inspectFsm.AddState(setBool);
-                    inspectFsm.Fsm.GlobalTransitions = inspectFsm.Fsm.GlobalTransitions.Prepend(new FsmTransition
-                    {
-                        FsmEvent = FsmEvent.GetFsmEvent("HERO DAMAGED"),
-                        ToFsmState = setBool,
-                        ToState = setBool.Name,
-                    }).ToArray();
-                    inspectFsm.GetState("Take Control").AddFirstAction(new SetBoolValue { boolVariable = heroDamaged, boolValue = false });
-                }
-                foreach (var t in setBool.Transitions) t.SetToState(turnBack);
+                // no hero damage behavior :)
             }
             else if (inspectFsm.FsmName == "inspect_region")
             {
+                ItemChangerMod.instance.Log($"TabletUtility.ModifyTablet inspect_region on {inspectFsm.gameObject.name} ({inspectFsm.gameObject.scene.name})");
                 FsmState heroLookUp = inspectFsm.GetState("Hero Look Up?");
                 FsmState cancel = inspectFsm.GetState("Cancel");
                 FsmState convoEnd = inspectFsm.GetState("Convo End");
@@ -192,6 +164,7 @@ namespace ItemChanger.Util
             }
             else if (inspectFsm.FsmName == "Conversation Control" && inspectFsm.GetState("Journal") is FsmState journal)
             {
+                ItemChangerMod.instance.Log($"TabletUtility.ModifyTablet Conversation Control with Journal on {inspectFsm.gameObject.name} ({inspectFsm.gameObject.scene.name})");
                 journal.SetActions(
                     new DelegateBoolTest(placement.AllObtained, journal.GetFirstActionOfType<PlayerDataBoolTest>()),
                     new AsyncLambda(callback => ItemUtility.GiveSequentially(items, placement, new GiveInfo

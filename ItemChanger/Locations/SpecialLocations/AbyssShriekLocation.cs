@@ -58,7 +58,7 @@ namespace ItemChanger.Locations.SpecialLocations
                 FsmState screamBurst = spellLevel == 1 ? fsm.GetState("Scream Burst 1") : fsm.GetState("Scream Burst 2");
 
                 screamGetAntic.GetFirstActionOfType<AudioPlay>().oneShotClip = screamAntic.GetFirstActionOfType<AudioPlay>().oneShotClip;
-                screamGetAntic.GetFirstActionOfType<PlayVibration>().highFidelityVibration = screamAntic.GetFirstActionOfType<PlayVibration>().highFidelityVibration;
+                //screamGetAntic.GetFirstActionOfType<PlayVibration>().highFidelityVibration = screamAntic.GetFirstActionOfType<PlayVibration>().highFidelityVibration;
 
                 screamGetBurst.GetFirstActionOfType<ActivateGameObject>().gameObject = screamBurst.GetActionsOfType<ActivateGameObject>()[1].gameObject;
                 screamGetBurst.GetFirstActionOfType<Tk2dPlayAnimationWithEvents>().clipName = screamBurst.GetFirstActionOfType<Tk2dPlayAnimationWithEvents>().clipName;

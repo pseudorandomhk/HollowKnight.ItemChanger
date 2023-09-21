@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿#if FALSE
+using System.Reflection;
 using System.Collections;
 
 namespace ItemChanger.Util
@@ -68,3 +69,4 @@ namespace ItemChanger.Util
 
     }
 }
+#endif

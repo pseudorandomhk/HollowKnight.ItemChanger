@@ -75,6 +75,13 @@ namespace ItemChanger.Modules
 
                 value = Value;
             }
+
+            public virtual bool Equals(LanguageEdit other) => ReferenceEquals(this, other) ||
+                (other is not null && this.EqualityContract == other.EqualityContract && this.Sheet == other.Sheet &&
+                this.Key == other.Key && this.Value == other.Value);
+
+            public override int GetHashCode() => HashCode.Combine(EqualityContract.GetHashCode(), Sheet?.GetHashCode(),
+                Key?.GetHashCode(), Value?.GetHashCode());
         }
 
         public class LanguageEditDictConverter : JsonConverter<Dictionary<LanguageKey, LanguageEdit>>

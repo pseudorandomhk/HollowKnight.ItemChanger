@@ -8,24 +8,25 @@
     {
         public override void Initialize()
         {
-            On.SceneAdditiveLoadConditional.OnEnable += SceneAdditiveLoadConditional_OnEnable;
+            //On.SceneAdditiveLoadConditional.OnEnable += SceneAdditiveLoadConditional_OnEnable;
             Events.AddFsmEdit(SceneNames.Ruins2_03, new FsmID("Battle Control", "Battle Control"), MoveGateTrigger);
         }
 
         public override void Unload()
         {
-            On.SceneAdditiveLoadConditional.OnEnable -= SceneAdditiveLoadConditional_OnEnable;
+            //On.SceneAdditiveLoadConditional.OnEnable -= SceneAdditiveLoadConditional_OnEnable;
             Events.RemoveFsmEdit(SceneNames.Ruins2_03, new FsmID("Battle Control", "Battle Control"), MoveGateTrigger);
         }
 
-        private void SceneAdditiveLoadConditional_OnEnable(On.SceneAdditiveLoadConditional.orig_OnEnable orig, SceneAdditiveLoadConditional self)
-        {
-            if (self.sceneNameToLoad.StartsWith(SceneNames.Ruins2_03))
-            {
-                self.doorTrigger = string.Empty;
-            }
-            orig(self);
-        }
+        // TODO: confirm this isn't needed
+        //private void SceneAdditiveLoadConditional_OnEnable(On.SceneAdditiveLoadConditional.orig_OnEnable orig, SceneAdditiveLoadConditional self)
+        //{
+        //    if (self.sceneNameToLoad.StartsWith(SceneNames.Ruins2_03))
+        //    {
+        //        self.doorTrigger = string.Empty;
+        //    }
+        //    orig(self);
+        //}
 
         private void MoveGateTrigger(PlayMakerFSM fsm)
         {

@@ -69,6 +69,12 @@ namespace ItemChanger.Modules
                         break;
                 }
             }
+
+            public virtual bool Equals(PDEdit other) => ReferenceEquals(this, other) ||
+                (other is not null && this.EqualityContract == other.EqualityContract &&
+                this.FieldName == other.FieldName && ReferenceEquals(this.Value, other.Value));
+
+            public override int GetHashCode() => HashCode.Combine(EqualityContract.GetHashCode(), FieldName?.GetHashCode(), Value?.GetHashCode());
         }
 
         public Queue<PDEdit> PDEdits = new();

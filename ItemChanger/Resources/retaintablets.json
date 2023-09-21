@@ -496,17 +496,5 @@
     "sceneName": "White_Palace_09",
     "flingType": "Everywhere",
     "tags": null
-  },
-  "Lore_Tablet-Path_of_Pain_Entrance": {
-    "$type": "ItemChanger.Locations.ExistingFsmContainerLocation, ItemChanger",
-    "objectName": null,
-    "fsmName": "inspect_region",
-    "containerType": "Tablet",
-    "nonreplaceable": false,
-    "elevation": 0.0,
-    "name": "Lore_Tablet-Path_of_Pain_Entrance",
-    "sceneName": "White_Palace_18",
-    "flingType": "Everywhere",
-    "tags": null
   }
 }

@@ -47,6 +47,11 @@ namespace ItemChanger.Modules
             else if (bal > 0) return string.Format(Language.Language.Get("PAY_EGGS", "Fmt"), bal);
             else return Language.Language.Get("FREE", "IC");
         }
+
+        public virtual bool Equals(CumulativeRancidEggCost other) => ReferenceEquals(this, other) ||
+            (base.Equals(other) && this.Total == other.Total && ReferenceEquals(this.module, other.module));
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Total.GetHashCode(), module?.GetHashCode());
     }
 
     /// <summary>

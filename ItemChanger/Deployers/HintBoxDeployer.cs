@@ -18,5 +18,12 @@ namespace ItemChanger.Deployers
             box.GetDisplayText = Text.GetValue;
             return box.gameObject;
         }
+
+        public virtual bool Equals(HintBoxDeployer other) => ReferenceEquals(this, other) ||
+            (base.Equals(other) && this.Width == other.Width
+            && this.Height == other.Height && ReferenceEquals(this.Text, other.Text));
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Width.GetHashCode(),
+            Height.GetHashCode(), Text?.GetHashCode());
     }
 }

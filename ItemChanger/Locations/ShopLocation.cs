@@ -142,6 +142,7 @@ namespace ItemChanger.Locations
             FsmState notchDisplayInit = fsm.GetState("Notch Display Init");
             FsmState notchDisplay = fsm.GetState("Notch Display?");
             FsmState checkCanBuy = fsm.GetState("Check Can Buy");
+            FsmState menuDown = fsm.GetState("Menu Down");
             FsmState activateConfirm = fsm.GetState("Activate confirm");
             FsmState activateUI = fsm.GetState("Activate UI");
 
@@ -257,7 +258,7 @@ namespace ItemChanger.Locations
                 }
             }
 
-            void SetConfirmName()
+            void StoreItemName()
             {
                 int index = fsm.FsmVariables.FindFsmInt("Current Item").Value;
                 GameObject shopItem = fsm.gameObject.GetComponent<ShopMenuStock>().stockInv[index];
@@ -272,27 +273,49 @@ namespace ItemChanger.Locations
                     name = Language.Language.Get(shopItem.GetComponent<ShopItemStats>().GetNameConvo(), "UI");
                 }
 
-                fsm.FsmVariables.FindFsmGameObject("Confirm").Value.transform.Find("Item name").GetComponent<TextMeshPro>()
-                    .text = name;
+                fsm.FsmVariables.GetFsmString("Item Name").Value = name;
             }
 
-            void AddIntToConfirm()
+            void AddItemCloneToConfirm()
             {
-                GameObject uiList = fsm.FsmVariables.FindFsmGameObject("UI List").Value;
+                GameObject uiList = fsm.FsmVariables.FindFsmGameObject("Confirm").Value.transform.FindChild("UI List").gameObject;
                 PlayMakerFSM confirmControl = uiList.LocateMyFSM("Confirm Control");
-                FsmInt itemIndex = confirmControl.FsmVariables.FindFsmInt("Item Index");
-                if (itemIndex == null)
+                FsmGameObject itemClone = confirmControl.FsmVariables.FindFsmGameObject("Item Clone");
+                if (itemClone == null)
                 {
-                    int length = confirmControl.FsmVariables.IntVariables.Length;
-                    FsmInt[] fsmInts = new FsmInt[length + 1];
-                    confirmControl.FsmVariables.IntVariables.CopyTo(fsmInts, 0);
-                    itemIndex = fsmInts[length] = new FsmInt
+                    int length = confirmControl.FsmVariables.GameObjectVariables.Length;
+                    FsmGameObject[] fsmGos = new FsmGameObject[length + 1];
+                    confirmControl.FsmVariables.GameObjectVariables.CopyTo(fsmGos, 0);
+                    itemClone = fsmGos[length] = new FsmGameObject
                     {
-                        Name = "Item Index",
+                        Name = "Item Clone",
                     };
-                    confirmControl.FsmVariables.IntVariables = fsmInts;
+                    confirmControl.FsmVariables.GameObjectVariables = fsmGos;
                 }
-                itemIndex.Value = fsm.FsmVariables.FindFsmInt("Current Item").Value;
+                int itemIndex = fsm.FsmVariables.FindFsmInt("Current Item").Value;
+                GameObject item = fsm.gameObject.GetComponent<ShopMenuStock>().stockInv[itemIndex];
+                GameObject clonedItem;
+
+                // instantiate as inactive prevents NREs from FSM hooks
+                {
+                    GameObject temp = new GameObject();
+                    temp.SetActive(false);
+                    clonedItem = (GameObject)UObject.Instantiate(item, temp.transform, false);
+                    clonedItem.SetActive(false);
+                    clonedItem.transform.SetParent(null);
+                    UObject.Destroy(temp);
+                }
+                
+                var mod = item.GetComponent<ModShopItemStats>();
+                if (mod)
+                {
+                    var clonedMod = clonedItem.GetComponent<ModShopItemStats>();
+                    clonedMod.item = mod.item;
+                    clonedMod.placement = mod.placement;
+                    clonedMod.costDisplayer = mod.costDisplayer;
+                }
+
+                itemClone.Value = clonedItem;
             }
 
             Lambda resetSprites = new Lambda(ResetSprites);
@@ -301,8 +324,8 @@ namespace ItemChanger.Locations
             Lambda setDesc = new Lambda(SetDesc);
             Lambda getNotchCost = new Lambda(GetNotchCost);
             DelegateBoolTest canBuy = new DelegateBoolTest(CanBuy, checkCanBuy.GetFirstActionOfType<BoolTest>());
-            Lambda setConfirmName = new Lambda(SetConfirmName);
-            Lambda addIntToConfirm = new Lambda(AddIntToConfirm);
+            Lambda storeItemName = new Lambda(StoreItemName);
+            Lambda addItemCloneToConfirm = new Lambda(AddItemCloneToConfirm);
 
             init.AddLastAction(resetSprites);
             getDetailsInit.SetActions(
@@ -317,30 +340,9 @@ namespace ItemChanger.Locations
             notchDisplayInit.AddFirstAction(getNotchCost);
             notchDisplay.AddFirstAction(getNotchCost);
             checkCanBuy.SetActions(canBuy);
-            activateConfirm.SetActions(
-                // Find Children
-                activateConfirm.Actions[0],
-                activateConfirm.Actions[1],
-                activateConfirm.Actions[2],
-                // 3-4 Set Confirm Name -- replace
-                setConfirmName,
-                // 5-6 Set Confirm Cost
-                activateConfirm.Actions[5],
-                activateConfirm.Actions[6],
-                // 7-10 Set and adjust sprite
-                activateConfirm.Actions[7],
-                activateConfirm.Actions[8],
-                activateConfirm.Actions[9],
-                activateConfirm.Actions[10],
-                // 11 Set relic number
-                activateConfirm.Actions[11],
-                // 12-15 Activate and send events
-                activateConfirm.Actions[12],
-                activateConfirm.Actions[13],
-                activateConfirm.Actions[14],
-                activateConfirm.Actions[15]
-            );
-            activateUI.AddLastAction(addIntToConfirm);
+            menuDown.ReplaceAction(storeItemName, 4); // CallMethodProper ShopMenuStock::GetNameConvo
+            menuDown.InsertAction(addItemCloneToConfirm, 1);
+            activateConfirm.RemoveAction(3); // GetLanguageString
         }
 
         /// <summary>
@@ -356,8 +358,7 @@ namespace ItemChanger.Locations
 
             bool ShouldSell()
             {
-                int index = fsm.FsmVariables.FindFsmInt("Item Index").Value;
-                GameObject shopItem = fsm.transform.parent.parent.Find("Item List").GetComponent<ShopMenuStock>().stockInv[index];
+                GameObject shopItem = fsm.FsmVariables.FindFsmGameObject("Item Clone").Value;
                 var mod = shopItem.GetComponent<ModShopItemStats>();
 
                 // only vanilla items in a selling shop are eligible for sale
@@ -371,8 +372,7 @@ namespace ItemChanger.Locations
 
             void Give()
             {
-                int index = fsm.FsmVariables.FindFsmInt("Item Index").Value;
-                GameObject shopItem = fsm.transform.parent.parent.Find("Item List").GetComponent<ShopMenuStock>().stockInv[index];
+                GameObject shopItem = fsm.FsmVariables.FindFsmGameObject("Item Clone").Value;
                 var mod = shopItem.GetComponent<ModShopItemStats>();
 
                 if (mod)
@@ -394,8 +394,7 @@ namespace ItemChanger.Locations
 
             void Pay()
             {
-                int index = fsm.FsmVariables.FindFsmInt("Item Index").Value;
-                GameObject shopItem = fsm.transform.parent.parent.Find("Item List").GetComponent<ShopMenuStock>().stockInv[index];
+                GameObject shopItem = fsm.FsmVariables.FindFsmGameObject("Item Clone").Value;
                 var mod = shopItem.GetComponent<ModShopItemStats>();
                 var stats = shopItem.GetComponent<ShopItemStats>();
 
@@ -414,10 +413,17 @@ namespace ItemChanger.Locations
                 }
             }
 
+            void DestroyItemClone()
+            {
+                GameObject shopItem = fsm.FsmVariables.FindFsmGameObject("Item Clone").Value;
+                UObject.Destroy(shopItem);
+            }
+
             Lambda give = new Lambda(Give);
             Lambda pay = new Lambda(Pay);
+            Lambda destroyItemClone = new Lambda(DestroyItemClone);
 
-            deductSet.SetActions(give, pay);
+            deductSet.SetActions(give, pay, destroyItemClone);
         }
 
         protected void HastenItemListControl(PlayMakerFSM fsm)
@@ -426,12 +432,12 @@ namespace ItemChanger.Locations
             FsmState blankName = fsm.GetState("Blank Name and Desc");
             FsmState activateConfirm = fsm.GetState("Activate confirm");
 
-            void ReduceFadeOutTime()
-            {
-                var fade = fsm.FsmVariables.FindFsmGameObject("Parent").Value.GetComponent<FadeGroup>();
-                fade.fadeOutTimeFast = fade.fadeOutTime = 0.01f;
-            }
-            menuDown.AddFirstAction(new Lambda(ReduceFadeOutTime));
+            //void ReduceFadeOutTime()
+            //{
+            //    var fade = fsm.FsmVariables.FindFsmGameObject("Parent").Value.GetComponent<FadeGroup>();
+            //    fade.fadeOutTimeFast = fade.fadeOutTime = 0.01f;
+            //}
+            //menuDown.AddFirstAction(new Lambda(ReduceFadeOutTime));
             menuDown.GetFirstActionOfType<Wait>().time = 0.01f;
             foreach (var a in menuDown.GetActionsOfType<SendEventByName>())
             {
@@ -441,13 +447,13 @@ namespace ItemChanger.Locations
                 }
             }
 
-            void ReduceFadeInTime()
-            {
-                var fade = fsm.FsmVariables.FindFsmGameObject("Confirm").Value.GetComponent<FadeGroup>();
-                fade.fadeInTime = 0.01f;
-            }
+            //void ReduceFadeInTime()
+            //{
+            //    var fade = fsm.FsmVariables.FindFsmGameObject("Confirm").Value.GetComponent<FadeGroup>();
+            //    fade.fadeInTime = 0.01f;
+            //}
 
-            blankName.AddLastAction(new Lambda(ReduceFadeInTime));
+            //blankName.AddLastAction(new Lambda(ReduceFadeInTime));
             activateConfirm.GetFirstActionOfType<Wait>().time = 0.01f;
         }
 

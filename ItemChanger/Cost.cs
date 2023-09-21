@@ -2,6 +2,8 @@
 using Newtonsoft.Json;
 using System.Collections;
 
+using Array = Shims.NET.System.Array;
+
 namespace ItemChanger
 {
     /// <summary>
@@ -110,6 +112,12 @@ namespace ItemChanger
             return new PDIntCost(amount, nameof(PlayerData.grubsCollected), amount == 1 ? Language.Language.Get("REQUIRES_GRUB", "IC")
                 : string.Format(Language.Language.Get("REQUIRES_GRUBS", "Fmt"), amount));
         }
+
+        public virtual bool Equals(Cost other) => ReferenceEquals(this, other) ||
+            (other is not null && this.EqualityContract == other.EqualityContract && this.Paid == other.Paid && this.Recurring == other.Recurring &&
+            this.DiscountRate == other.DiscountRate);
+
+        public override int GetHashCode() => HashCode.Combine(EqualityContract.GetHashCode(), Paid.GetHashCode(), Recurring.GetHashCode(), DiscountRate.GetHashCode());
     }
 
     /// <summary>
@@ -215,6 +223,11 @@ namespace ItemChanger
         public IEnumerator<Cost> GetEnumerator() => Costs.OfType<Cost>().GetEnumerator();
 
         IEnumerator IEnumerable.GetEnumerator() => Costs.GetEnumerator();
+
+        public bool Equals(MultiCost other) => ReferenceEquals(this, other) || (base.Equals(other)
+            && ReferenceEquals(this.Costs, other.Costs));
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Costs?.GetHashCode());
     }
 
     /// <summary>
@@ -234,11 +247,16 @@ namespace ItemChanger
         {
             return Language.Language.Get(uiText, "Exact");
         }
+
+        public bool Equals(PDBoolCost other) => ReferenceEquals(this, other) ||
+            (base.Equals(other) && this.fieldName == other.fieldName && this.uiText == other.uiText);
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), fieldName?.GetHashCode(), uiText?.GetHashCode());
     }
 
-    /// <summary>
-    /// Cost which has no pay effects, but can only be paid when the specified PlayerData int comparison succeeds.
-    /// </summary>
+        /// <summary>
+        /// Cost which has no pay effects, but can only be paid when the specified PlayerData int comparison succeeds.
+        /// </summary>
     public sealed record PDIntCost(int amount, string fieldName, string uiText, ComparisonOperator op = ComparisonOperator.Ge) : Cost
     {
         public override bool CanPay() => PlayerData.instance.GetInt(fieldName).Compare(op, amount);
@@ -253,6 +271,13 @@ namespace ItemChanger
         {
             return Language.Language.Get(uiText, "Exact");
         }
+
+        public bool Equals(PDIntCost other) => ReferenceEquals(this, other) ||
+            (base.Equals(other) && this.amount == other.amount && this.fieldName == other.fieldName &&
+            this.uiText == other.uiText && this.op == other.op);
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), amount.GetHashCode(),
+            fieldName?.GetHashCode(), uiText?.GetHashCode(), op.GetHashCode());
     }
 
     /// <summary>
@@ -277,6 +302,12 @@ namespace ItemChanger
         {
             return Language.Language.Get(uiText, "Exact");
         }
+
+        public bool Equals(ConsumablePDIntCost other) => ReferenceEquals(this, other) ||
+            (base.Equals(other) && this.amount == other.amount && this.fieldName == other.fieldName && this.uiText == other.uiText);
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), amount.GetHashCode(),
+            fieldName?.GetHashCode(), uiText?.GetHashCode());
     }
 
     /// <summary>
@@ -303,5 +334,10 @@ namespace ItemChanger
         {
             return string.Format(Language.Language.Get("PAY_GEO", "Fmt"), (int)(amount * DiscountRate));
         }
+
+        public bool Equals(GeoCost other) => ReferenceEquals(this, other) ||
+            (base.Equals(other) && this.amount == other.amount);
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), amount.GetHashCode());
     }
 }

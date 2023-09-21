@@ -1,4 +1,5 @@
-﻿namespace ItemChanger.Locations.SpecialLocations
+﻿#if FALSE
+namespace ItemChanger.Locations.SpecialLocations
 {
     /// <summary>
     /// Boss Essence Location which supports a hint from reading Bretta's Diary.
@@ -43,3 +44,4 @@
         }
     }
 }
+#endif

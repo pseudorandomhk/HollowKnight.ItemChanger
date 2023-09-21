@@ -7,7 +7,7 @@ namespace ItemChanger.Containers
 {
     public class BluggsacContainer : Container
     {
-        // reference: sharedassets81
+        // reference: sharedassets78
 
         public override string Name => Container.Bluggsac;
 
@@ -20,14 +20,12 @@ namespace ItemChanger.Containers
             burst.SetActions(
                 burst.Actions[0], // SendEventByName EnemyKillShake
                 burst.Actions[1], // tk2dplayanimationwithevents burst
-                // burst.Actions[2], // activategameobject egg
-                // burst.Actions[3], // setparent egg
+                burst.Actions[2], // flingobjectsfromglobalpool spatter
+                // burst.Actions[3], // activategameobject egg
+                // burst.Actions[4], // setparent egg
                 new Lambda(InstantiateShiniesAndGiveEarly),
-                burst.Actions[4], // audioplayeroneshotsingle
-                burst.Actions[5], // audiostop
-                burst.Actions[6], // playparticleemitter
-                burst.Actions[7], // stopparticleemitter
-                burst.Actions[8] // setparent pt blow
+                burst.Actions[5], // audioplayeroneshotsingle
+                burst.Actions[6] // audiostop
             );
 
             void InstantiateShiniesAndGiveEarly()

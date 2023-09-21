@@ -53,8 +53,8 @@ namespace ItemChanger.Locations.SpecialLocations
 
             convoChoice.Transitions = new FsmTransition[]
             {
-                new(){ FsmEvent = dungEvent, ToFsmState = dung, ToState = dung.Name },
-                new(){ FsmEvent = FsmEvent.Finished, ToFsmState = eggMax, ToState = eggMax.Name },
+                new(){ FsmEvent = dungEvent, ToState = dung.Name },
+                new(){ FsmEvent = FsmEvent.Finished, ToState = eggMax.Name },
             };
 
             convoChoice.SetActions(

@@ -38,7 +38,7 @@ namespace ItemChanger.Util
 
             PlayMakerFSM bottleControl = mimicBottle.LocateMyFSM("Bottle Control");
             FsmState init = bottleControl.GetState("Init");
-            init.ReplaceAction(new DelegateBoolTest(() => placement.CheckVisitedAny(VisitState.Dropped), (BoolTest)init.Actions[0]), 0);
+            init.ReplaceAction(new DelegateBoolTest(() => placement.CheckVisitedAny(VisitState.Dropped), (BoolTest)init.Actions[0]), 1);
             init.GetFirstActionOfType<SendEventByName>().eventTarget.gameObject.GameObject = mimicTop;
             FsmState shatter = bottleControl.GetState("Shatter");
             shatter.AddFirstAction(new Lambda(() => placement.AddVisitFlag(VisitState.Dropped)));
@@ -56,22 +56,30 @@ namespace ItemChanger.Util
         public static void ModifyMimic(PlayMakerFSM mimicTopFsm, FlingType flingType, AbstractPlacement placement, IEnumerable<AbstractItem> items)
         {
             GameObject mimic = mimicTopFsm.gameObject.FindChild("Grub Mimic 1")!;
-            HealthManager hm = mimic.GetComponent<HealthManager>();
+            //HealthManager hm = mimic.GetComponent<HealthManager>();
 
             FsmState init = mimicTopFsm.GetState("Init");
             init.SetActions(
+                //init.Actions[0],
+                //init.Actions[1],
+                //init.Actions[2],
+                //init.Actions[6],
+                //init.Actions[7],
+                //new DelegateBoolTest(() => placement.CheckVisitedAny(VisitState.Opened), (BoolTest)init.Actions[8])
+                //// the removed actions are all various tests to check if the mimic is dead
+                //// we tie it to the placement to make it easier to control
                 init.Actions[0],
                 init.Actions[1],
                 init.Actions[2],
-                init.Actions[6],
-                init.Actions[7],
+                init.Actions[3],
+                init.Actions[4],
+                // 5-7 check if mimic is dead
+                init.Actions[8],
                 new DelegateBoolTest(() => placement.CheckVisitedAny(VisitState.Opened), (BoolTest)init.Actions[8])
-                // the removed actions are all various tests to check if the mimic is dead
-                // we tie it to the placement to make it easier to control
             );
             FsmState activate = mimicTopFsm.GetState("Activate");
             activate.AddFirstAction(new Lambda(GiveAll));
-            hm.OnDeath += GiveAll;
+            mimic.LocateMyFSM("death_control").GetState("Destroy").AddFirstAction(new Lambda(GiveAll));
 
             void GiveAll()
             {

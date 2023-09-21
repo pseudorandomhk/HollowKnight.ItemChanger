@@ -15,14 +15,14 @@ namespace ItemChanger.Locations.SpecialLocations
         protected override void OnLoad()
         {
             Events.AddFsmEdit(UnsafeSceneName, new("End Cutscene", "Control"), EditEndCutscene);
-            Events.AddFsmEdit(SceneNames.Abyss_15, new("Mirror", "FSM"), EditMirror);
+            Events.AddSceneChangeEdit(SceneNames.Abyss_15, EditMirror);
             Events.AddFsmEdit(SceneNames.Abyss_15, new("Dream Enter Abyss", "Control"), EditDreamEnter);
         }
 
         protected override void OnUnload()
         {
             Events.RemoveFsmEdit(UnsafeSceneName, new("End Cutscene", "Control"), EditEndCutscene);
-            Events.RemoveFsmEdit(SceneNames.Abyss_15, new("Mirror", "FSM"), EditMirror);
+            Events.RemoveSceneChangeEdit(SceneNames.Abyss_15, EditMirror);
             Events.RemoveFsmEdit(SceneNames.Abyss_15, new("Dream Enter Abyss", "Control"), EditDreamEnter);
         }
 
@@ -45,12 +45,12 @@ namespace ItemChanger.Locations.SpecialLocations
             init.SetActions(init.Actions[0], new DelegateBoolTest(Placement.AllObtained, "INACTIVE", null));
         }
 
-        private void EditMirror(PlayMakerFSM fsm)
+        private void EditMirror(Scene to)
         {
-            if (this.GetItemHintActive()) HintBox.Create(fsm.transform, Placement);
+            GameObject mirror = to.GetRootGameObjects().FirstOrDefault(go => go.name == "Mirror");
 
-            FsmState check = fsm.GetState("Check");
-            check.SetActions(new DelegateBoolTest(Placement.AllObtained, (PlayerDataBoolTest)check.Actions[0]));
+            if (Placement.AllObtained()) UObject.Destroy(mirror);
+            else if (this.GetItemHintActive()) HintBox.Create(mirror.transform, Placement);
         }
     }
 }

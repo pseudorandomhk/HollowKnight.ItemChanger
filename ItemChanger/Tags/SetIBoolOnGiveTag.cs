@@ -1,4 +1,6 @@
-﻿namespace ItemChanger.Tags
+﻿using static Shims.NET.System.Enum;
+
+namespace ItemChanger.Tags
 {
     /// <summary>
     /// Tag which sets an IWriteableBool when its parent item is given.

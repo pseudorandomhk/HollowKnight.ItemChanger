@@ -65,7 +65,7 @@ namespace ItemChanger.Internal.Menu
         /// <param name="title">The title of the menu screen.</param>
         /// <param name="returnScreen">The screen that the back button will return to.</param>
         /// <param name="entries">A list of IMenuMod.MenuEntry objects corresponding to the buttons.</param>
-        public static MenuScreen CreateMenuScreen(string title, MenuScreen returnScreen, IReadOnlyList<IMenuMod.MenuEntry> entries)
+        public static MenuScreen CreateMenuScreen(string title, MenuScreen returnScreen, IList<IMenuMod.MenuEntry> entries)
         {
             MenuBuilder builder = CreateMenuBuilder(title, returnScreen, out MenuButton backButton);
 
@@ -107,7 +107,7 @@ namespace ItemChanger.Internal.Menu
         /// <summary>
         /// Adds the menu entries to the content area.
         /// </summary>
-        public static void AddMenuEntriesToContentArea(ContentArea c, IReadOnlyList<IMenuMod.MenuEntry> entries, MenuScreen returnScreen)
+        public static void AddMenuEntriesToContentArea(ContentArea c, IList<IMenuMod.MenuEntry> entries, MenuScreen returnScreen)
         {
             foreach (IMenuMod.MenuEntry entry in entries)
             {

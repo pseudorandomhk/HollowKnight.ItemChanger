@@ -117,6 +117,7 @@ namespace ItemChanger.Placements
             CostDisplayer costDisplayer = Location.costDisplayerSelectionStrategy.GetCostDisplayer(item);
 
             var mod = stats.gameObject.AddComponent<ModShopItemStats>();
+            var costFsm = stats.gameObject.LocateMyFSM("Set Amount");
             mod.item = item;
             mod.cost = cost;
             mod.costDisplayer = costDisplayer;
@@ -127,8 +128,8 @@ namespace ItemChanger.Placements
             stats.nameConvo = string.Empty;
             stats.descConvo = string.Empty;
             stats.requiredPlayerDataBool = requiredPlayerDataBool;
-            stats.removalPlayerDataBool = string.Empty;
-            stats.dungDiscount = dungDiscount;
+            //stats.removalPlayerDataBool = string.Empty;
+            costFsm.FsmVariables.GetFsmBool("Dung Discount").Value = true;
             stats.notchCostBool = string.Empty;
             
 
@@ -136,9 +137,9 @@ namespace ItemChanger.Placements
             stats.priceConvo = string.Empty;
             stats.specialType = 0;
             stats.charmsRequired = 0;
-            stats.relic = false;
+            costFsm.FsmVariables.GetFsmBool("Trinket").Value = true;
             stats.relicNumber = 0;
-            stats.relicPDInt = string.Empty;
+            costFsm.FsmVariables.GetFsmString("Trinket PD").Value = string.Empty;
 
             // Apply the sprite for the UI
             stats.transform.Find("Item Sprite").gameObject.GetComponent<SpriteRenderer>().sprite = item.GetResolvedUIDef(this)!.GetSprite();

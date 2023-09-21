@@ -341,12 +341,6 @@ namespace ItemChanger.Modules
                         SD.Save("Ruins1_31", "Ruins Lever");
                     }
                     break;
-                case SceneNames.Ruins1_31b:
-                    if (t.GateName == "right1")
-                    {
-                        SD.Save("Ruins1_31", "Ruins Lever");
-                    }
-                    break;
                 case SceneNames.Ruins2_01:
                     if (t.GateName == "top1")
                     {
@@ -376,12 +370,6 @@ namespace ItemChanger.Modules
                     {
                         PlayerData.instance.SetBool(nameof(PlayerData.bathHouseWall), true);
                         SD.Save("Ruins_Bathhouse", "Breakable Wall");
-                    }
-                    break;
-                case SceneNames.Ruins2_11_b:
-                    if (t.GateName == "left1")
-                    {
-                        PlayerData.instance.SetBool(nameof(PlayerData.openedLoveDoor), true);
                     }
                     break;
                 case SceneNames.Ruins_House_03:
@@ -417,12 +405,6 @@ namespace ItemChanger.Modules
                             break;
                         case "door_jiji":
                             PlayerData.instance.SetBool(nameof(PlayerData.jijiDoorUnlocked), true);
-                            break;
-                        case "room_grimm":
-                            PlayerData.instance.SetBool(nameof(PlayerData.troupeInTown), true);
-                            break;
-                        case "room_divine":
-                            PlayerData.instance.SetBool(nameof(PlayerData.divineInTown), true);
                             break;
                     }
                     if (t.GateName != "left1")

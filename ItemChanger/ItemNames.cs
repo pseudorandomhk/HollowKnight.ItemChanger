@@ -24,7 +24,6 @@ namespace ItemChanger
         public const string Shade_Cloak = "Shade_Cloak";
         public const string Ismas_Tear = "Isma's_Tear";
         public const string Dream_Nail = "Dream_Nail";
-        public const string Dream_Gate = "Dream_Gate";
         public const string Awoken_Dream_Nail = "Awoken_Dream_Nail";
         public const string Vengeful_Spirit = "Vengeful_Spirit";
         public const string Shade_Soul = "Shade_Soul";
@@ -62,13 +61,10 @@ namespace ItemChanger
         public const string Glowing_Womb = "Glowing_Womb";
         public const string Fragile_Heart = "Fragile_Heart";
         public const string Fragile_Heart_Repair = "Fragile_Heart_(Repair)";
-        public const string Unbreakable_Heart = "Unbreakable_Heart";
         public const string Fragile_Greed = "Fragile_Greed";
         public const string Fragile_Greed_Repair = "Fragile_Greed_(Repair)";
-        public const string Unbreakable_Greed = "Unbreakable_Greed";
         public const string Fragile_Strength = "Fragile_Strength";
         public const string Fragile_Strength_Repair = "Fragile_Strength_(Repair)";
-        public const string Unbreakable_Strength = "Unbreakable_Strength";
         public const string Nailmasters_Glory = "Nailmaster's_Glory";
         public const string Jonis_Blessing = "Joni's_Blessing";
         public const string Shape_of_Unn = "Shape_of_Unn";
@@ -83,11 +79,6 @@ namespace ItemChanger
         public const string King_Fragment = "King_Fragment";
         public const string Kingsoul = "Kingsoul";
         public const string Void_Heart = "Void_Heart";
-        public const string Sprintmaster = "Sprintmaster";
-        public const string Dreamshield = "Dreamshield";
-        public const string Weaversong = "Weaversong";
-        public const string Grimmchild1 = "Grimmchild1";
-        public const string Grimmchild2 = "Grimmchild2";
         public const string City_Crest = "City_Crest";
         public const string Lumafly_Lantern = "Lumafly_Lantern";
         public const string Tram_Pass = "Tram_Pass";
@@ -96,7 +87,6 @@ namespace ItemChanger
         public const string Elegant_Key = "Elegant_Key";
         public const string Love_Key = "Love_Key";
         public const string Kings_Brand = "King's_Brand";
-        public const string Godtuner = "Godtuner";
         public const string Collectors_Map = "Collector's_Map";
         public const string Mask_Shard = "Mask_Shard";
         public const string Double_Mask_Shard = "Double_Mask_Shard";
@@ -150,8 +140,6 @@ namespace ItemChanger
         public const string Boss_Essence_Failed_Champion = "Boss_Essence-Failed_Champion";
         public const string Boss_Essence_Soul_Tyrant = "Boss_Essence-Soul_Tyrant";
         public const string Boss_Essence_Lost_Kin = "Boss_Essence-Lost_Kin";
-        public const string Boss_Essence_White_Defender = "Boss_Essence-White_Defender";
-        public const string Boss_Essence_Grey_Prince_Zote = "Boss_Essence-Grey_Prince_Zote";
         public const string Grub = "Grub";
         public const string Mimic_Grub = "Mimic_Grub";
         public const string Quill = "Quill";
@@ -163,10 +151,6 @@ namespace ItemChanger
         public const string Stag_Station_Pin = "Stag_Station_Pin";
         public const string Tram_Pin = "Tram_Pin";
         public const string Hot_Spring_Pin = "Hot_Spring_Pin";
-        public const string Scarab_Marker = "Scarab_Marker";
-        public const string Shell_Marker = "Shell_Marker";
-        public const string Token_Marker = "Token_Marker";
-        public const string Gleaming_Marker = "Gleaming_Marker";
         public const string Crossroads_Map = "Crossroads_Map";
         public const string Greenpath_Map = "Greenpath_Map";
         public const string Fog_Canyon_Map = "Fog_Canyon_Map";
@@ -189,17 +173,14 @@ namespace ItemChanger
         public const string Kings_Station_Stag = "King's_Station_Stag";
         public const string Resting_Grounds_Stag = "Resting_Grounds_Stag";
         public const string Distant_Village_Stag = "Distant_Village_Stag";
-        public const string Hidden_Station_Stag = "Hidden_Station_Stag";
         public const string Stag_Nest_Stag = "Stag_Nest_Stag";
         public const string Lifeblood_Cocoon_Small = "Lifeblood_Cocoon_Small";
         public const string Lifeblood_Cocoon_Large = "Lifeblood_Cocoon_Large";
-        public const string Grimmkin_Flame = "Grimmkin_Flame";
         public const string Hunters_Journal = "Hunter's_Journal";
         public const string Journal_Entry_Void_Tendrils = "Journal_Entry-Void_Tendrils";
         public const string Journal_Entry_Charged_Lumafly = "Journal_Entry-Charged_Lumafly";
         public const string Journal_Entry_Goam = "Journal_Entry-Goam";
         public const string Journal_Entry_Garpede = "Journal_Entry-Garpede";
-        public const string Journal_Entry_Seal_of_Binding = "Journal_Entry-Seal_of_Binding";
         public const string Elevator_Pass = "Elevator_Pass";
         public const string Left_Mothwing_Cloak = "Left_Mothwing_Cloak";
         public const string Right_Mothwing_Cloak = "Right_Mothwing_Cloak";
@@ -243,7 +224,6 @@ namespace ItemChanger
         public const string Soul_Totem_F = "Soul_Totem-F";
         public const string Soul_Totem_G = "Soul_Totem-G";
         public const string Soul_Totem_Palace = "Soul_Totem-Palace";
-        public const string Soul_Totem_Path_of_Pain = "Soul_Totem-Path_of_Pain";
         public const string Lore_Tablet_City_Entrance = "Lore_Tablet-City_Entrance";
         public const string Lore_Tablet_Pleasure_House = "Lore_Tablet-Pleasure_House";
         public const string Lore_Tablet_Sanctum_Entrance = "Lore_Tablet-Sanctum_Entrance";
@@ -276,6 +256,5 @@ namespace ItemChanger
         public const string Lore_Tablet_Kingdoms_Edge = "Lore_Tablet-Kingdom's_Edge";
         public const string Lore_Tablet_Palace_Workshop = "Lore_Tablet-Palace_Workshop";
         public const string Lore_Tablet_Palace_Throne = "Lore_Tablet-Palace_Throne";
-        public const string Lore_Tablet_Path_of_Pain_Entrance = "Lore_Tablet-Path_of_Pain_Entrance";
     }
 }

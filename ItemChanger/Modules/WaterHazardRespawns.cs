@@ -26,30 +26,6 @@
                     CreateWaterSpawn(231f, 26.5f, 6f, 8f, false);
                     break;
 
-                case SceneNames.GG_Atrium:
-                    CreateWaterSpawn(148.5f, 63f, 10f, 5f, false);
-                    CreateWaterSpawn(140f, 18f, 1f, 13f, true);
-                    break;
-
-                case SceneNames.GG_Lurker:
-                    CreateWaterSpawn(84f, 112.5f, 1f, 15f, true);
-                    CreateWaterSpawn(102f, 110f, 1f, 10f, false);
-                    CreateWaterSpawn(79f, 80f, 1f, 10f, true);
-                    CreateWaterSpawn(109f, 59.5f, 1f, 17f, true);
-                    CreateWaterSpawn(177.5f, 57.5f, 1f, 15f, true);
-                    CreateWaterSpawn(181f, 82.5f, 1f, 10f, true);
-                    CreateWaterSpawn(189f, 82.5f, 1f, 10f, false);
-                    break;
-
-                case SceneNames.GG_Waterways:
-                    CreateWaterSpawn(72.5f, 16f, 2f, 9f, true);
-                    CreateWaterSpawn(61.5f, 63.5f, 4f, 7f, true);
-                    CreateWaterSpawn(81f, 63f, 1f, 6f, false);
-                    CreateWaterSpawn(91f, 63f, 1f, 6f, true);
-                    CreateWaterSpawn(95f, 49.75f, 5.5f, 6f, false);
-                    CreateWaterSpawn(128f, 62f, 1f, 22f, false);
-                    break;
-
                 case SceneNames.RestingGrounds_08:
                     CreateWaterSpawn(37.5f, 11f, 1f, 15f, true);
                     CreateWaterSpawn(62f, 11f, 1f, 15f, false);
@@ -64,17 +40,6 @@
                     CreateWaterSpawn(127.5f, 27f, 1f, 5f, false);
                     CreateWaterSpawn(116.5f, 61f, 1f, 10f, true);
                     CreateWaterSpawn(124f, 61f, 1f, 10f, false);
-                    break;
-
-                case SceneNames.Room_GG_Shortcut:
-                    CreateWaterSpawn(36.5f, 43f, 4f, 7f, false);
-                    CreateWaterSpawn(32f, 74f, 4f, 9f, true);
-                    CreateWaterSpawn(9.5f, 89f, 9f, 5f, true);
-                    break;
-
-                case SceneNames.GG_Pipeway:
-                    CreateWaterSpawn(8f, 15f, 1f, 7f, false);
-                    CreateWaterSpawn(6f, 24f, 1f, 7f, false);
                     break;
 
                 case SceneNames.Ruins1_03:

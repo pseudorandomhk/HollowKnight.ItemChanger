@@ -1,6 +1,11 @@
 ﻿using ItemChanger.Extensions;
 using ItemChanger.Internal;
 using ItemChanger.Util;
+using Modding;
+using MonoMod.RuntimeDetour;
+using System.Collections;
+
+using Array = Shims.NET.System.Array;
 
 namespace ItemChanger
 {
@@ -71,7 +76,8 @@ namespace ItemChanger
         /// </summary>
         public static event Action? OnSemiPersistentUpdate;
 
-
+        private static IDetour transitionSceneHook;
+        private static IDetour changeToSceneHook;
 
         /// <summary>
         /// The action will be invoked on any fsm matching the id.
@@ -189,7 +195,15 @@ namespace ItemChanger
             Modding.ModHooks.LanguageGetHook += LanguageGetHook;
             On.GameManager.StartNewGame += BeforeStartNewGameHook;
             On.GameManager.ContinueGame += OnContinueGame;
-            On.GameManager.BeginSceneTransition += TransitionHook;
+            // methods patched in with monomod, can't use On.*
+            transitionSceneHook = new Hook(
+                ReflectionHelper.GetMethodInfo(typeof(GameManager), nameof(GameManager.TransitionSceneWithInfo)),
+                HookTransitionScene
+            );
+            changeToSceneHook = new Hook(
+                ReflectionHelper.GetMethodInfo(typeof(GameManager), nameof(GameManager.ChangeToSceneWithInfo)),
+                HookChangeToScene
+            );
             On.GameManager.ResetSemiPersistentItems += OnResetSemiPersistentItems;
             try
             {
@@ -208,7 +222,8 @@ namespace ItemChanger
             Modding.ModHooks.LanguageGetHook -= LanguageGetHook;
             On.GameManager.StartNewGame -= BeforeStartNewGameHook;
             On.GameManager.ContinueGame -= OnContinueGame;
-            On.GameManager.BeginSceneTransition -= TransitionHook;
+            transitionSceneHook.Dispose();
+            changeToSceneHook.Dispose();
             On.GameManager.ResetSemiPersistentItems -= OnResetSemiPersistentItems;
             try
             {
@@ -256,7 +271,7 @@ namespace ItemChanger
             // Local fsm hooks are run if the fsm matches the scene and id.
             try
             {
-                if (localOnEnable.TryGetValue(sceneName, out var dict))
+                if (sceneName != null && localOnEnable.TryGetValue(sceneName, out var dict))
                 {
                     dict.GetOrDefault(weakID)?.Invoke(fsm);
                     dict.GetOrDefault(id)?.Invoke(fsm);
@@ -266,24 +281,6 @@ namespace ItemChanger
             catch (Exception e)
             {
                 LogError($"Error during local fsm hook on {strongID} in scene {sceneName}:\n{e}");
-            }
-
-            // Run the local search a second time for boss scenes, etc, in case the more general scene name was used to hook.
-            if (SceneUtil.TryGetSuperScene(sceneName, out string normalizedSceneName))
-            {
-                try
-                {
-                    if (localOnEnable.TryGetValue(normalizedSceneName, out var dict))
-                    {
-                        dict.GetOrDefault(weakID)?.Invoke(fsm);
-                        dict.GetOrDefault(id)?.Invoke(fsm);
-                        dict.GetOrDefault(strongID)?.Invoke(fsm);
-                    }
-                }
-                catch (Exception e)
-                {
-                    LogError($"Error during local fsm hook on {strongID} in scene {normalizedSceneName}:\n{e}");
-                }
             }
 
             // the late container hook lets hooks above add ContainerInfo components 
@@ -392,7 +389,7 @@ namespace ItemChanger
             }
         }
 
-        private static void BeforeStartNewGameHook(On.GameManager.orig_StartNewGame orig, GameManager self, bool permadeathMode, bool bossRushMode)
+        private static void BeforeStartNewGameHook(On.GameManager.orig_StartNewGame orig, GameManager self, bool permadeathMode)
         {
             try
             {
@@ -423,7 +420,7 @@ namespace ItemChanger
             else
             {
                 DoOnEnterGame();
-                orig(self, permadeathMode, bossRushMode);
+                orig(self, permadeathMode);
             }
 
             try
@@ -443,7 +440,7 @@ namespace ItemChanger
             orig(self);
         }
 
-        private static void TransitionHook(On.GameManager.orig_BeginSceneTransition orig, GameManager self, GameManager.SceneLoadInfo info)
+        private static void HookTransitionInfo(GameManager self, GameManager.SceneLoadInfo info)
         {
             string sceneName = self.sceneName;
             string? gateName = null;
@@ -473,9 +470,6 @@ namespace ItemChanger
                             break;
                         case SceneNames.Town when info.SceneName == SceneNames.Room_Bretta:
                             gateName = "door_bretta";
-                            break;
-                        case SceneNames.Town when info.SceneName == SceneNames.Grimm_Main_Tent:
-                            gateName = "room_grimm";
                             break;
                         case SceneNames.Crossroads_04 when info.SceneName == SceneNames.Room_Charm_Shop:
                             gateName = "door_charmshop";
@@ -518,6 +512,7 @@ namespace ItemChanger
                         {
                             LogError($"Error invoking OnTransitionOverride with parameters {source}, {origTarget}, {modified}:\n{e}");
                         }
+                        Log($"Overrode transition {source.SceneName}[{source.GateName}] from {origTarget.SceneName}[{origTarget.GateName}] to {modified.SceneName}[{modified.GateName}]");
                         target = new(modified.SceneName, modified.GateName);
                     }
                 }
@@ -532,6 +527,24 @@ namespace ItemChanger
                 LogError($"Error invoking OnBeginSceneTransition with parameter {target}:\n{e}");
             }
 
+            if (target != origTarget)
+            {
+                info.CallingGate = null;
+                info.SceneName = target.SceneName;
+                info.EntryGateName = target.GateName;
+            }
+            //orig(self, info);
+        }
+
+        private static IEnumerator HookTransitionScene(Func<GameManager, GameManager.SceneLoadInfo, IEnumerator> orig, GameManager self, GameManager.SceneLoadInfo info)
+        {
+            HookTransitionInfo(self, info);
+            return orig(self, info);
+        }
+
+        private static void HookChangeToScene(Action<GameManager, GameManager.SceneLoadInfo> orig, GameManager self, GameManager.SceneLoadInfo info)
+        {
+            HookTransitionInfo(self, info);
             orig(self, info);
         }
 

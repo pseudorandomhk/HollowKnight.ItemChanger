@@ -14,7 +14,7 @@
             {
                 if ((destroyRewards & (SeerRewards)(1 << i)) != 0) PlayerData.instance.SetBool($"dreamReward{i + 1}", true);
             }
-            if ((destroyRewards & SeerRewards.dreamReward5b) != 0) PlayerData.instance.SetBool(nameof(PlayerData.dreamReward5b), true);
+            //if ((destroyRewards & SeerRewards.dreamReward5b) != 0) PlayerData.instance.SetBool(nameof(PlayerData.dreamReward5b), true);
             for (int i = 6; i <= 9; i++)
             {
                 if ((destroyRewards & (SeerRewards)(1 << i)) != 0) PlayerData.instance.SetBool($"dreamReward{i}", true);

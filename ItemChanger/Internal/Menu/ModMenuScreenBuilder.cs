@@ -72,7 +72,7 @@ namespace ItemChanger.Internal.Menu
         /// <summary>
         /// Adds a button which proceeds to a subpage consisting of a list of MenuOptionHorizontals.
         /// </summary>
-        public void AddSubpage(string title, string description, IReadOnlyList<IMenuMod.MenuEntry> entries)
+        public void AddSubpage(string title, string description, IList<IMenuMod.MenuEntry> entries)
         {
             MenuScreen screen = ModMenuHelper.CreateMenuScreen(title, this.menuBuilder.Screen, entries);
             AddSubpage(title, description, screen);

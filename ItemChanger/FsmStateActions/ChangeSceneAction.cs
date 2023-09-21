@@ -36,37 +36,20 @@ namespace ItemChanger.FsmStateActions
                 return;
             }
 
-            SceneLoad load = ReflectionHelper.GetField<GameManager, SceneLoad>(Ref.GM, "sceneLoad");
-            if (load != null)
-            {
-                load.Finish += () =>
-                {
-                    LoadScene(sceneName, gateName, delay);
-                };
-            }
-            else
-            {
-                LoadScene(sceneName, gateName, delay);
-            }
+            LoadScene(sceneName, gateName, delay);
         }
 
         private static void LoadScene(string sceneName, string gateName, float delay)
         {
             Ref.GM.StopAllCoroutines();
-            ReflectionHelper.SetField<GameManager, SceneLoad>(Ref.GM, "sceneLoad", null!);
 
-            Ref.GM.BeginSceneTransition(new GameManager.SceneLoadInfo
+            Ref.GM.StartCoroutine(Ref.GM.TransitionSceneWithInfo(new GameManager.SceneLoadInfo
             {
-                IsFirstLevelForPlayer = false,
                 SceneName = sceneName,
                 HeroLeaveDirection = GetGatePosition(gateName),
                 EntryGateName = gateName,
-                EntryDelay = delay,
-                PreventCameraFadeOut = false,
-                WaitForSceneTransitionCameraFade = true,
-                Visualization = GameManager.SceneLoadVisualizations.Default,
-                AlwaysUnloadUnusedAssets = false
-            });
+                EntryDelay = delay
+            }));
         }
 
         private static GatePosition GetGatePosition(string name)

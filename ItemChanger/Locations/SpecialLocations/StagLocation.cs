@@ -9,6 +9,7 @@ namespace ItemChanger.Locations.SpecialLocations
     /// </summary>
     public class StagLocation : CoordinateLocation
     {
+        // TODO: verify ui_list hook
         protected override void OnLoad()
         {
             base.OnLoad();
@@ -41,13 +42,13 @@ namespace ItemChanger.Locations.SpecialLocations
 
         private void EditStagControl(PlayMakerFSM fsm)
         {
-            FsmState hsprompt = fsm.GetState("Hidden Station?");
+            //FsmState hsprompt = fsm.GetState("Hidden Station?");
             FsmState openGrate = fsm.GetState("Open Grate");
             FsmState currentLocationCheck = fsm.GetState("Current Location Check");
             FsmState checkResult = fsm.GetState("Check Result");
             FsmState hudreturn = fsm.GetState("HUD Return");
 
-            if (UnsafeSceneName == "Abyss_22") hsprompt.RemoveActionsOfType<IntCompare>();
+            //if (UnsafeSceneName == "Abyss_22") hsprompt.RemoveActionsOfType<IntCompare>();
 
             openGrate.RemoveActionsOfType<SetPlayerDataBool>();
             openGrate.RemoveActionsOfType<SetBoolValue>();

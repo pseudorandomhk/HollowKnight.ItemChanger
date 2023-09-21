@@ -19,8 +19,9 @@
     {
         /// <summary>
         /// The cost displayer to use.
+        /// <br />[<c>required</c> field]
         /// </summary>
-        public required CostDisplayer CostDisplayer { get; set; }
+        public CostDisplayer CostDisplayer { get; set; }
 
         /// <inheritdoc/>
         public CostDisplayer GetCostDisplayer(AbstractItem item) => CostDisplayer;

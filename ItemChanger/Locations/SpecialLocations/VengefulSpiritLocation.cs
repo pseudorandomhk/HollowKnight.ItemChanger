@@ -44,7 +44,8 @@ namespace ItemChanger.Locations.SpecialLocations
             checkSummoned.RemoveActionsOfType<FindChild>();
             checkSummoned.GetActionsOfType<ActivateGameObject>().First(a => a.gameObject.GameObject.Name == "Vengeful Spirit").recursive = false;
             spellAppear.GetActionsOfType<ActivateGameObject>().First(a => a.gameObject.GameObject.Name == "Vengeful Spirit").recursive = false;
-            spellAppear.ReplaceAction(new Lambda(() => { }), 8); // this replaces a wait after the spawn animation and seems to prevent a freeze
+            // TODO: verify index
+            spellAppear.ReplaceAction(new Lambda(() => { }), 11); // this replaces a wait after the spawn animation and seems to prevent a freeze
         }
 
         private void Destroy(PlayMakerFSM fsm)

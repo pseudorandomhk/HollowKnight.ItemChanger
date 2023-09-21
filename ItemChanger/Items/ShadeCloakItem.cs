@@ -8,7 +8,7 @@
         public override void GiveImmediate(GiveInfo info)
         {
             base.GiveImmediate(info);
-            EventRegister.SendEvent("GOT SHADOW DASH");
+            //EventRegister.SendEvent("GOT SHADOW DASH");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using ItemChanger.Util;
+﻿#if FALSE
+using ItemChanger.Util;
 
 namespace ItemChanger.Items
 {
@@ -40,3 +41,4 @@ namespace ItemChanger.Items
         }
     }
 }
+#endif

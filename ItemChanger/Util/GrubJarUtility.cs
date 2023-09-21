@@ -89,6 +89,7 @@ namespace ItemChanger.Util
             itemParent.transform.localPosition = Vector3.zero;
             itemParent.SetActive(true);
 
+            shatter.AddTransition("CANCEL", bottleFsm.GetState("Return Pause"));
             shatter.AddFirstAction(new DelegateBoolTest(() => CheckIfLanded(jar), null, "CANCEL"));
             shatter.AddLastAction(new Lambda(InstantiateShiniesAndGiveEarly));
 

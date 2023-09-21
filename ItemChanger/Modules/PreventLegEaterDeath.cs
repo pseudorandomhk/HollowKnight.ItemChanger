@@ -1,4 +1,5 @@
-﻿using ItemChanger.Extensions;
+﻿#if FALSE
+using ItemChanger.Extensions;
 
 namespace ItemChanger.Modules
 {
@@ -23,7 +24,7 @@ namespace ItemChanger.Modules
         private bool GetPlayerBoolHook(string name, bool orig)
         {
             if (name == nameof(PlayerData.legEaterLeft)) return false; // this shouldn't actually be necessary, but better safe than sorry
-            else return orig;
+            return orig;
         }
 
         private void RemoveConversationOptions(PlayMakerFSM fsm)
@@ -36,3 +37,4 @@ namespace ItemChanger.Modules
         }
     }
 }
+#endif

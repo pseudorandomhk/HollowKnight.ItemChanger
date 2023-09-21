@@ -10,7 +10,6 @@
         public override void GiveImmediate(GiveInfo info)
         {
             PlayerData.instance.SetBool(nameof(PlayerData.hasMap), true);
-            PlayerData.instance.SetBool(nameof(PlayerData.hasMarker), true);
             PlayerData.instance.SetBool(nameof(PlayerData.openedMapperShop), true);
             PlayerData.instance.SetBool(fieldName, true);
         }

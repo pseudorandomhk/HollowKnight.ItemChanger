@@ -23,8 +23,10 @@ namespace ItemChanger.Modules
             Events.AddLanguageEdit(new("UI", "INV_DESC_SUPERDASH"), EditSuperdashDesc);
             Modding.ModHooks.GetPlayerBoolHook += SkillBoolGetOverride;
             Modding.ModHooks.SetPlayerBoolHook += SkillBoolSetOverride;
-            On.DeactivateIfPlayerdataTrue.OnEnable += SetMylaDeathCondition;
-            On.DeactivateIfPlayerdataFalse.OnEnable += SetMylaDeathCondition;
+            Events.AddFsmEdit(SceneNames.Crossroads_45, new("Miner", "Leave"), SetMylaDeathCondition);
+            Events.AddFsmEdit(SceneNames.Crossroads_45, new("Zombie Myla", "FSM"), SetMylaDeathCondition);
+            //On.DeactivateIfPlayerdataTrue.OnEnable += SetMylaDeathCondition;
+            //On.DeactivateIfPlayerdataFalse.OnEnable += SetMylaDeathCondition;
         }
 
         public override void Unload()
@@ -35,8 +37,10 @@ namespace ItemChanger.Modules
             Events.RemoveLanguageEdit(new("UI", "INV_DESC_SUPERDASH"), EditSuperdashDesc);
             Modding.ModHooks.GetPlayerBoolHook -= SkillBoolGetOverride;
             Modding.ModHooks.SetPlayerBoolHook -= SkillBoolSetOverride;
-            On.DeactivateIfPlayerdataTrue.OnEnable -= SetMylaDeathCondition;
-            On.DeactivateIfPlayerdataFalse.OnEnable -= SetMylaDeathCondition;
+            Events.RemoveFsmEdit(SceneNames.Crossroads_45, new("Miner", "Leave"), SetMylaDeathCondition);
+            Events.RemoveFsmEdit(SceneNames.Crossroads_45, new("Zombie Myla", "FSM"), SetMylaDeathCondition);
+            //On.DeactivateIfPlayerdataTrue.OnEnable -= SetMylaDeathCondition;
+            //On.DeactivateIfPlayerdataFalse.OnEnable -= SetMylaDeathCondition;
         }
 
         private void EditInventory(PlayMakerFSM fsm)
@@ -120,11 +124,12 @@ namespace ItemChanger.Modules
             DieAfterRightSuperdash,
         }
 
-        private void SetMylaDeathCondition(On.DeactivateIfPlayerdataTrue.orig_OnEnable orig, DeactivateIfPlayerdataTrue self)
+        private void SetMylaDeathCondition(PlayMakerFSM fsm)
         {
-            if (self.gameObject.scene.name == SceneNames.Crossroads_45 && self.boolName == nameof(PlayerData.hasSuperDash))
+            if ((fsm.gameObject.name == "Miner" && fsm.FsmVariables.GetFsmString("playerData bool").Value == nameof(PlayerData.hasSuperDash))
+                || fsm.gameObject.name == "Zombie Myla")
             {
-                self.boolName = MylaDeathHandling switch
+                fsm.FsmVariables.GetFsmString("playerData bool").Value = MylaDeathHandling switch
                 {
                     MylaDeathCondition.DieAfterFullSuperdash => nameof(hasSuperdashBoth),
                     MylaDeathCondition.DieAfterRightSuperdash => nameof(hasSuperdashRight),
@@ -133,22 +138,37 @@ namespace ItemChanger.Modules
                     _ => nameof(PlayerData.canSuperDash),
                 };
             }
-            orig(self);
         }
-        private void SetMylaDeathCondition(On.DeactivateIfPlayerdataFalse.orig_OnEnable orig, DeactivateIfPlayerdataFalse self)
-        {
-            if (self.gameObject.scene.name == SceneNames.Crossroads_45 && self.boolName == nameof(PlayerData.hasSuperDash))
-            {
-                self.boolName = MylaDeathHandling switch
-                {
-                    MylaDeathCondition.DieAfterFullSuperdash => nameof(hasSuperdashBoth),
-                    MylaDeathCondition.DieAfterRightSuperdash => nameof(hasSuperdashRight),
-                    MylaDeathCondition.DieAfterLeftSuperdash => nameof(hasSuperdashLeft),
-                    MylaDeathCondition.DieAfterEitherSuperdash => nameof(hasSuperdashAny),
-                    _ => nameof(PlayerData.canSuperDash),
-                };
-            }
-            orig(self);
-        }
+
+        //private void SetMylaDeathCondition(On.DeactivateIfPlayerdataTrue.orig_OnEnable orig, DeactivateIfPlayerdataTrue self)
+        //{
+        //    if (self.gameObject.scene.name == SceneNames.Crossroads_45 && self.boolName == nameof(PlayerData.hasSuperDash))
+        //    {
+        //        self.boolName = MylaDeathHandling switch
+        //        {
+        //            MylaDeathCondition.DieAfterFullSuperdash => nameof(hasSuperdashBoth),
+        //            MylaDeathCondition.DieAfterRightSuperdash => nameof(hasSuperdashRight),
+        //            MylaDeathCondition.DieAfterLeftSuperdash => nameof(hasSuperdashLeft),
+        //            MylaDeathCondition.DieAfterEitherSuperdash => nameof(hasSuperdashAny),
+        //            _ => nameof(PlayerData.canSuperDash),
+        //        };
+        //    }
+        //    orig(self);
+        //}
+        //private void SetMylaDeathCondition(On.DeactivateIfPlayerdataFalse.orig_OnEnable orig, DeactivateIfPlayerdataFalse self)
+        //{
+        //    if (self.gameObject.scene.name == SceneNames.Crossroads_45 && self.boolName == nameof(PlayerData.hasSuperDash))
+        //    {
+        //        self.boolName = MylaDeathHandling switch
+        //        {
+        //            MylaDeathCondition.DieAfterFullSuperdash => nameof(hasSuperdashBoth),
+        //            MylaDeathCondition.DieAfterRightSuperdash => nameof(hasSuperdashRight),
+        //            MylaDeathCondition.DieAfterLeftSuperdash => nameof(hasSuperdashLeft),
+        //            MylaDeathCondition.DieAfterEitherSuperdash => nameof(hasSuperdashAny),
+        //            _ => nameof(PlayerData.canSuperDash),
+        //        };
+        //    }
+        //    orig(self);
+        //}
     }
 }

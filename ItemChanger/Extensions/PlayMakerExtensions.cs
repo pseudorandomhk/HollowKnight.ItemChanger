@@ -1,4 +1,6 @@
-﻿namespace ItemChanger.Extensions
+﻿using static Shims.NET.System.Array;
+
+namespace ItemChanger.Extensions
 {
     /// <summary>
     /// Extensions for interacting with and modifying FSMs.
@@ -20,7 +22,7 @@
             FsmState state = new(fsm.Fsm)
             {
                 Name = name,
-                Transitions = Array.Empty<FsmTransition>(),
+                Transitions = Empty<FsmTransition>(),
             };
             state.ClearActions();
             AddState(fsm, state);
@@ -81,7 +83,7 @@
             action.Init(state);
         }
 
-        public static void ClearActions(this FsmState state) => state.SetActions(Array.Empty<FsmStateAction>());
+        public static void ClearActions(this FsmState state) => state.SetActions(Empty<FsmStateAction>());
 
         public static void SetActions(this FsmState state, params FsmStateAction[] actions)
         {
@@ -169,7 +171,6 @@
             FsmTransition t = new FsmTransition
             {
                 FsmEvent = fsmEvent,
-                ToFsmState = toState,
                 ToState = toState.Name,
             };
             transitions[state.Transitions.Length] = t;
@@ -190,7 +191,7 @@
 
         public static void RemoveTransitionsTo(this FsmState state, string toState)
         {
-            state.Transitions = state.Transitions.Where(t => (t.ToFsmState?.Name ?? t.ToState) != toState).ToArray();
+            state.Transitions = state.Transitions.Where(t => t.ToState != toState).ToArray();
         }
 
         public static void RemoveTransitionsOn(this FsmState state, string eventName)
@@ -200,13 +201,12 @@
 
         public static void SetToState(this FsmTransition transition, FsmState toState)
         {
-            transition.ToFsmState = toState;
             transition.ToState = toState.Name;
         }
 
         public static void ClearTransitions(this FsmState state)
         {
-            state.Transitions = Array.Empty<FsmTransition>();
+            state.Transitions = Empty<FsmTransition>();
         }
     }
 }

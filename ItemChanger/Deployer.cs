@@ -51,5 +51,12 @@
             obj.SetActive(true);
             return obj;
         }
+
+        public virtual bool Equals(Deployer other) => ReferenceEquals(this, other) ||
+            (other is not null && this.EqualityContract == other.EqualityContract && this.SceneName == other.SceneName &&
+            this.X == other.X && this.Y == other.Y);
+
+        public override int GetHashCode() => HashCode.Combine(EqualityContract.GetHashCode(), SceneName?.GetHashCode(),
+            X.GetHashCode(), Y.GetHashCode());
     }
 }

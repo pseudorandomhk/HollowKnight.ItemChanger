@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using static Shims.NET.System.IO.Stream;
 
 namespace ItemChanger.Internal
 {

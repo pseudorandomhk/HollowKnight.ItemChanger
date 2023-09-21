@@ -1,4 +1,5 @@
-﻿using Mono.Cecil.Cil;
+﻿#if FALSE
+using Mono.Cecil.Cil;
 using MonoMod.Cil;
 
 namespace ItemChanger.Modules
@@ -35,3 +36,4 @@ namespace ItemChanger.Modules
         }
     }
 }
+#endif

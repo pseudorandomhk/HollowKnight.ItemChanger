@@ -10,7 +10,7 @@ namespace ItemChanger.Internal.Preloaders
             yield return (SceneNames.Tutorial_01, "_Props/Chest");
             yield return (SceneNames.Tutorial_01, "_Scenery/plat_float_17");
             yield return (SceneNames.Tutorial_01, "_Props/Tut_tablet_top (1)");
-            yield return (SceneNames.Deepnest_36, "d_break_0047_deep_lamp2/lamp_bug_escape (7)");
+            yield return (SceneNames.Deepnest_36, "d_break_0047_deep_lamp2/Debris/lamp_bug_escape (7)");
             yield return (SceneNames.Ruins1_05b, "Shop Menu");
         }
 
@@ -30,7 +30,7 @@ namespace ItemChanger.Internal.Preloaders
             _smallPlatform = objectsByScene[SceneNames.Tutorial_01]["_Scenery/plat_float_17"];
             UObject.DontDestroyOnLoad(_smallPlatform);
 
-            _lumaflyEscape = objectsByScene[SceneNames.Deepnest_36]["d_break_0047_deep_lamp2/lamp_bug_escape (7)"];
+            _lumaflyEscape = objectsByScene[SceneNames.Deepnest_36]["d_break_0047_deep_lamp2/Debris/lamp_bug_escape (7)"];
             FixLumaflyEscape(_lumaflyEscape);
             UObject.DontDestroyOnLoad(_lumaflyEscape);
 
@@ -70,23 +70,25 @@ namespace ItemChanger.Internal.Preloaders
 
         private static void FixLumaflyEscape(GameObject lumaflyEscape)
         {
-            ParticleSystem.MainModule psm = lumaflyEscape.GetComponent<ParticleSystem>().main;
+            ParticleSystem psm = lumaflyEscape.GetComponent<ParticleSystem>();
             ParticleSystem.EmissionModule pse = lumaflyEscape.GetComponent<ParticleSystem>().emission;
             ParticleSystem.ShapeModule pss = lumaflyEscape.GetComponent<ParticleSystem>().shape;
             ParticleSystem.TextureSheetAnimationModule pst = lumaflyEscape.GetComponent<ParticleSystem>().textureSheetAnimation;
             ParticleSystem.ForceOverLifetimeModule psf = lumaflyEscape.GetComponent<ParticleSystem>().forceOverLifetime;
-
-            psm.duration = 1f;
-            psm.startLifetimeMultiplier = 4f;
-            psm.startSizeMultiplier = 2f;
-            psm.startSizeXMultiplier = 2f;
+            
+            //psm.duration = 1f;
+            //psm.startLifetimeMultiplier = 4f;
+            psm.startLifetime *= 4f;
+            //psm.startSizeMultiplier = 2f;
+            psm.startSize *= 2f;
+            //psm.startSizeXMultiplier = 2f;
             psm.gravityModifier = -0.2f;
             psm.maxParticles = 99;              // In practice it only spawns 9 lumaflies
-            pse.rateOverTimeMultiplier = 10f;
+            //pse.rateOverTimeMultiplier = 10f;
             pss.radius = 0.5868902f;
             pst.cycleCount = 15;
-            psf.xMultiplier = 3;
-            psf.yMultiplier = 8;
+            //psf.xMultiplier = 3;
+            //psf.yMultiplier = 8;
 
             // I have no idea what this is supposed to be lmao
             AnimationCurve yMax = new AnimationCurve(new Keyframe(0, 0.0810811371f), new Keyframe(0.230769232f, 0.108108163f),
@@ -113,7 +115,8 @@ namespace ItemChanger.Internal.Preloaders
             shopMenu.transform.Find("Item Details").gameObject.SetActive(true);
             // make this not be a selling shop for later convenience
             shopMenu.transform.Find("Confirm").Find("Confirm msg")
-                .GetComponent<SetTextMeshProGameText>().convName = "SHOP_PURCHASE_CONFIRM";
+                .gameObject.LocateMyFSM("Set purchase or sell text")
+                .FsmVariables.FindFsmString("Text String").Value = "SHOP_PURCHASE_CONFIRM";
             PlayMakerFSM fsm = shopMenu.LocateMyFSM("shop_control");
             fsm.FsmVariables.FindFsmBool("Relic Dealer").Value = false;
             fsm.FsmVariables.FindFsmBool("Selling Shop").Value = false;

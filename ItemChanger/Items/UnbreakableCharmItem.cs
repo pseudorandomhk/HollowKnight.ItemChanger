@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿#if FALSE
+using Newtonsoft.Json;
 
 namespace ItemChanger.Items
 {
@@ -36,3 +37,4 @@ namespace ItemChanger.Items
         }
     }
 }
+#endif

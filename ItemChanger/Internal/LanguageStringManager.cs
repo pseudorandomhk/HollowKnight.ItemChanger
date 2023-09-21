@@ -174,13 +174,6 @@ namespace ItemChanger.Internal
                 return string.Format(Language.Language.Get("GRUB", "Fmt"), PlayerData.instance.GetInt(nameof(PlayerData.grubsCollected)));
             }
 
-            if (key == "ITEMCHANGER_POSTVIEW_GRIMMKIN_FLAME")
-            {
-                int flames = PlayerData.instance.GetInt(nameof(Modules.GrimmkinFlameManager.cumulativeFlamesCollected));
-                if (flames <= 0) flames = PlayerData.instance.GetInt(nameof(PlayerData.flamesCollected));
-                return string.Format(Language.Language.Get("FLAME", "Fmt"), flames);
-            }
-
             return orig;
         }
     }

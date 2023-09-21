@@ -78,8 +78,9 @@ namespace ItemChanger.Components
             // I'm not sure which of these actually sets the color
             ParticleSystem.ColorOverLifetimeModule col = ps.colorOverLifetime;
             col.color = color;
-            ParticleSystem.MainModule main = ps.main;
-            main.startColor = color;
+            //ParticleSystem.MainModule main = ps.main;
+            //main.startColor = color;
+            ps.startColor = color;
         }
     }
 }

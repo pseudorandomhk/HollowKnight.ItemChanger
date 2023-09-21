@@ -1,4 +1,7 @@
-﻿namespace ItemChanger.Items
+﻿using HutongGames.PlayMaker.Actions;
+using ItemChanger.Extensions;
+
+namespace ItemChanger.Items
 {
     /// <summary>
     /// BoolItem that lights up the room the player is in when obtained.
@@ -25,24 +28,32 @@
                     {
                         FSMUtility.SetInt(vignetteFSM, "Darkness Level", sm.darknessLevel);
                     }
-                    if (!sm.noLantern)
-                    {
-                        vignetteFSM.SendEvent("RESET");
-                    }
-                    else
-                    {
-                        vignetteFSM.SendEvent("SCENE RESET NO LANTERN");
-                        if (Internal.Ref.HC != null)
-                        {
-                            Internal.Ref.HC.wieldingLantern = false;
-                        }
-                    }
+                    vignetteFSM.SendEvent("SCENE RESET");
+                    //if (!sm.noLantern)
+                    //{
+                    //    vignetteFSM.SendEvent("RESET");
+                    //}
+                    //else
+                    //{
+                    //    vignetteFSM.SendEvent("SCENE RESET NO LANTERN");
+                    //    if (Internal.Ref.HC != null)
+                    //    {
+                    //        Internal.Ref.HC.wieldingLantern = false;
+                    //    }
+                    //}
                 }
 
                 // Reactivate HazardRespawnTriggers
-                foreach (DeactivateInDarknessWithoutLantern d in UObject.FindObjectsOfType<DeactivateInDarknessWithoutLantern>(includeInactive: true))
+                //foreach (DeactivateInDarknessWithoutLantern d in UObject.FindObjectsOfType<DeactivateInDarknessWithoutLantern>(includeInactive: true))
+                //{
+                //    d.gameObject.SetActive(true);
+                //}
+                var rootGos = UnityEngine.SceneManagement.SceneManager.GetActiveScene().GetRootGameObjects();
+                foreach (var fsm in rootGos.SelectMany(go => go.GetComponentsInChildren<PlayMakerFSM>(true)))
                 {
-                    d.gameObject.SetActive(true);
+                    if (fsm.FsmName != "Deactivate in darkness without lantern") continue;
+                    fsm.Fsm.RestartOnEnable = false;
+                    fsm.Fsm.GetOwnerDefaultTarget(((ActivateGameObject)(fsm.GetState("Deactivate").Actions[0])).gameObject).SetActive(true);
                 }
             }
         }

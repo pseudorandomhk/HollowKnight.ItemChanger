@@ -1,4 +1,5 @@
-﻿using ItemChanger.Extensions;
+﻿#if FALSE
+using ItemChanger.Extensions;
 
 namespace ItemChanger.Modules
 {
@@ -34,3 +35,4 @@ namespace ItemChanger.Modules
         }
     }
 }
+#endif

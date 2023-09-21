@@ -24,8 +24,9 @@ namespace ItemChanger.Locations.SpecialLocations
             FsmState init = fsm.GetState("Init");
             init.ReplaceAction(new DelegateBoolTest(Placement.AllObtained, (PlayerDataBoolTest)init.Actions[0]), 0);
 
-            FsmState takeControl = fsm.GetState("Take Control");
-            takeControl.RemoveActionsOfType<ActivateGameObject>();
+            // doesn't exist on 1028
+            //FsmState takeControl = fsm.GetState("Take Control");
+            //takeControl.RemoveActionsOfType<ActivateGameObject>();
 
             FsmState setRespawn = fsm.GetState("Set Respawn");
             setRespawn.ClearActions();
@@ -38,7 +39,7 @@ namespace ItemChanger.Locations.SpecialLocations
             uiMsg.SetActions(give);
 
             FsmState end = fsm.GetState("End");
-            end.RemoveActionsOfType<SendEventToRegister>();
+            //end.RemoveActionsOfType<SendEventToRegister>();
         }
     }
 }

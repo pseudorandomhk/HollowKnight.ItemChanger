@@ -1,4 +1,5 @@
-﻿namespace ItemChanger.Util
+﻿#if FALSE
+namespace ItemChanger.Util
 {
     public static class SceneUtil
     {
@@ -41,3 +42,4 @@
 
     }
 }
+#endif

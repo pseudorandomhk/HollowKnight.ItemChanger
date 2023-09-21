@@ -1,4 +1,6 @@
-﻿using ItemChanger.Util;
+﻿using ItemChanger.Extensions;
+using ItemChanger.FsmStateActions;
+using ItemChanger.Util;
 
 namespace ItemChanger.Locations
 {
@@ -36,39 +38,30 @@ namespace ItemChanger.Locations
             DoCleanup();
 
             GameObject enemy = fsm.gameObject;
-            HealthManager hm = enemy.GetComponent<HealthManager>();
-            if (!hm.hasSpecialDeath)
+            PlayMakerFSM hm = enemy.LocateMyFSM("health_manager_enemy");
+            if (hm.FsmVariables.GetFsmBool("Special Death").Value)
             {
-                hm.OnDeath += OnDeath;
+                var specialDeathTransition = hm.GetState("Pause").Transitions.First(t => t.EventName == "RETURN");
+                var onDeathState = new FsmState(hm.Fsm);
+                onDeathState.Name = "ItemChanger::Give Item";
+
+                var onDeathAction = new Lambda(OnDeath);
+                onDeathState.Actions = new[] { onDeathAction };
+                onDeathState.AddTransition(FsmEvent.Finished, hm.Fsm.GetState(specialDeathTransition.ToState));
+
+                specialDeathTransition.ToState = onDeathState.Name;
             }
             else
             {
-                On.HealthManager.Die += OnSpecialDeath;
-                _cleanupAction = () =>
-                {
-                    On.HealthManager.Die -= OnSpecialDeath;
-                };
+                var deathControl = enemy.LocateMyFSM("death_control");
+                deathControl.GetState("Destroy").AddFirstAction(new Lambda(OnDeath));
             }
 
             if (removeGeo)
             {
-                hm.SetGeoSmall(0);
-                hm.SetGeoMedium(0);
-                hm.SetGeoLarge(0);
-            }
-
-            void OnSpecialDeath(On.HealthManager.orig_Die orig, HealthManager self, float? attackDirection, AttackTypes attackType, bool ignoreEvasion)
-            {
-                if (self != hm || hm.isDead)
-                {
-                    orig(self, attackDirection, attackType, ignoreEvasion);
-                    return;
-                }
-                else
-                {
-                    orig(self, attackDirection, attackType, ignoreEvasion);
-                    OnDeath();
-                }
+                hm.FsmVariables.GetFsmInt("Geo Small").Value = 0;
+                hm.FsmVariables.GetFsmInt("Geo Medium").Value = 0;
+                hm.FsmVariables.GetFsmInt("Geo Large").Value = 0;
             }
 
             void OnDeath()

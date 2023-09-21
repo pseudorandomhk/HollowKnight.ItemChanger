@@ -4,6 +4,8 @@ using ItemChanger.Internal;
 using System;
 using System.Collections.Generic;
 
+using Array = Shims.NET.System.Array;
+
 namespace ItemChanger.Locations
 {
     /// <summary>
@@ -129,7 +131,7 @@ namespace ItemChanger.Locations
             shopUp.SetActions(
                 new Lambda(() =>
                 {
-                    GameObject hero = fsm.FsmVariables.GetFsmGameObject("Hero Obj").Value;
+                    GameObject hero = fsm.FsmVariables.GetFsmGameObject("Hero").Value;
                     GameObject self = fsm.gameObject;
                     Vector3 shopPosition = shopObject.transform.position;
                     if (hero.transform.position.x < self.transform.position.x)
@@ -176,12 +178,12 @@ namespace ItemChanger.Locations
             FsmState stockCheck = fsm.GetState("Stock?");
             FsmState boxUp = fsm.GetState("Box Up");
             FsmState checkRelics = fsm.GetState("Check Relics");
-
+            
             setFigurehead.AddLastAction(new Lambda(() => {
                 GameObject figurehead = fsm.FsmVariables.FindFsmGameObject("Current Figurehead").Value;
                 if (figureheadSprite != null)
                 {
-                    UObject.DestroyImmediate(figurehead.GetComponent<InvAnimateUpAndDown>());
+                    //UObject.DestroyImmediate(figurehead.GetComponent<InvAnimateUpAndDown>());
                     UObject.DestroyImmediate(figurehead.GetComponent<tk2dSprite>());
                     UObject.DestroyImmediate(figurehead.GetComponent<tk2dSpriteAnimator>());
                     UObject.DestroyImmediate(figurehead.GetComponent<MeshRenderer>());
@@ -190,11 +192,35 @@ namespace ItemChanger.Locations
                     SpriteRenderer renderer = figurehead.AddComponent<SpriteRenderer>();
                     renderer.sprite = figureheadSprite.GetValue();
                     renderer.enabled = false;
-                    FadeGroup group = renderer.transform.parent.parent.GetComponent<FadeGroup>();
-                    SpriteRenderer[] spriteRenderers = new SpriteRenderer[group.spriteRenderers.Length + 1];
-                    spriteRenderers[0] = renderer;
-                    group.spriteRenderers.CopyTo(spriteRenderers, 1);
-                    group.spriteRenderers = spriteRenderers;
+                    //FadeGroup group = renderer.transform.parent.parent.GetComponent<FadeGroup>();
+                    //SpriteRenderer[] spriteRenderers = new SpriteRenderer[group.spriteRenderers.Length + 1];
+                    //spriteRenderers[0] = renderer;
+                    //group.spriteRenderers.CopyTo(spriteRenderers, 1);
+                    //group.spriteRenderers = spriteRenderers;
+
+                    SimpleSpriteFade fader = figurehead.AddComponent<SimpleSpriteFade>();
+                    fader.fadeDuration = 0.01f;     // fast fade duration from ShopLocation
+                    fader.fadeInColor = renderer.color;
+                    fader.fadeInOnStart = false;
+
+                    renderer.color = new Color(renderer.color.r, renderer.color.g, renderer.color.b, 0f);
+                    renderer.enabled = true;
+
+                    PlayMakerFSM figureheadAnimation = figurehead.LocateMyFSM("animate_up_and_down");
+
+                    FsmState init = figureheadAnimation.GetState("Init");
+                    FsmState up = figureheadAnimation.GetState("Up");
+                    FsmState down = figureheadAnimation.GetState("Down");
+
+                    init.Actions = Array.Empty<FsmStateAction>();
+                    init.RemoveTransitionsOn("UP");
+                    init.AddTransition("UP", up);
+
+                    up.SetActions(new Lambda(fader.FadeIn));
+                    up.RemoveTransitionsOn("REPEAT UP ANIM");
+
+                    down.SetActions(new Lambda(fader.FadeOut));
+                    down.RemoveTransitionsOn("FINISHED");
                 }
                 else
                 {

@@ -65,7 +65,7 @@ namespace ItemChanger.Components
 
         public void Start()
         {
-            Ref.GM.SaveGame(Ref.GM.profileID, x => { });
+            Ref.GM.SaveGame(Ref.GM.profileID);
             StartCoroutine(ShowPopup());
         }
 

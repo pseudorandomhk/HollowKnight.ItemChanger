@@ -3,6 +3,7 @@ using ItemChanger.Modules;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using Module = ItemChanger.Modules.Module;
+using static Shims.NET.System.Enum;
 
 namespace ItemChanger.Internal
 {

@@ -60,48 +60,8 @@ namespace ItemChanger.Containers
 
             FsmBool activated = fsm.FsmVariables.FindFsmBool("Activated");
             FsmInt value = fsm.FsmVariables.FindFsmInt("Value");
-            
-            if (init.Transitions.Length < 2) // modify PoP fsm to match usual fsm
-            {
-                FsmGameObject emitter = fsm.FsmVariables.FindFsmGameObject("Emitter");
-                FsmOwnerDefault emitterOwnerDefault = new() { GameObject = emitter, OwnerOption = OwnerDefaultOption.SpecifyGameObject, };
-                FsmGameObject glower = fsm.FsmVariables.FindFsmGameObject("Glower");
-                FsmOwnerDefault self = new();
-                FsmGameObject hero = fsm.FsmVariables.FindFsmGameObject("Hero");
-                FsmFloat distance = fsm.FsmVariables.FindFsmFloat("Distance");
 
-                FsmState depleted = new(fsm.Fsm)
-                {
-                    Name = "Depleted",
-                    Transitions = Array.Empty<FsmTransition>(),
-                };
-                depleted.SetActions(
-                    new SetCollider { gameObject = self, active = false, },
-                    new DestroyObject { gameObject = emitter, delay = 0, detachChildren = false, },
-                    new DestroyObject { gameObject = glower, delay = 0, detachChildren = false, },
-                    new ActivateGameObject { gameObject = emitterOwnerDefault, activate = false, recursive = false, resetOnExit = false, everyFrame = false },
-                    new SetBoolValue { boolVariable = activated, boolValue = true, everyFrame = false },
-                    new SetParticleEmission { gameObject = emitterOwnerDefault, emission = false },
-                    new GetDistance { gameObject = self, target = hero, },
-                    far.GetFirstActionOfType<GetMaterialColor>(),
-                    far.GetFirstActionOfType<EaseColor>(),
-                    far.GetFirstActionOfType<SetMaterialColor>()
-                );
-                fsm.AddState(depleted);
-
-                FsmState meshRendererOff = new(fsm.Fsm)
-                {
-                    Name = "Mesh Renderer Off",
-                    Transitions = new[] { new FsmTransition { FsmEvent = FsmEvent.Finished, ToFsmState = depleted, ToState = depleted.Name } },
-                };
-                meshRendererOff.SetActions(
-                    new SetSpriteRenderer { gameObject = self, active = false }
-                );
-                fsm.AddState(meshRendererOff);
-
-                init.AddTransition(FsmEvent.GetFsmEvent("DEPLETED"), meshRendererOff);
-                hit.AddTransition(FsmEvent.GetFsmEvent("DEPLETED"), depleted);
-            }
+            // no pop totem :)
 
             PersistentIntItem pii = fsm.GetComponent<PersistentIntItem>();
             if (pii == null)
@@ -123,7 +83,7 @@ namespace ItemChanger.Containers
             FsmState giveItems = new(fsm.Fsm)
             {
                 Name = "Give Items",
-                Transitions = new[] { new FsmTransition { FsmEvent = FsmEvent.Finished, ToFsmState = hit, ToState = hit.Name, } },
+                Transitions = new[] { new FsmTransition { FsmEvent = FsmEvent.Finished, ToState = hit.Name, } },
             };
             giveItems.SetActions(
                 new Lambda(InstantiateShiniesAndGiveEarly)

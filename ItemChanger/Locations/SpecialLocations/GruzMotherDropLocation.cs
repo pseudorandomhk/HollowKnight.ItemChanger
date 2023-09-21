@@ -11,6 +11,7 @@ namespace ItemChanger.Locations.SpecialLocations
     {
         public bool removeGeo = true;
 
+        // TODO: verify at runtime
         protected override void OnLoad()
         {
             Events.AddFsmEdit(UnsafeSceneName, new("burster"), EditCorpseBurst);

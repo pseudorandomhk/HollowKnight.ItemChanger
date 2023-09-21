@@ -32,7 +32,6 @@ namespace ItemChanger
         public const string Shade_Cloak = "Shade_Cloak";
         public const string Ismas_Tear = "Isma's_Tear";
         public const string Dream_Nail = "Dream_Nail";
-        public const string Dream_Gate = "Dream_Gate";
         public const string Awoken_Dream_Nail = "Awoken_Dream_Nail";
         public const string Vengeful_Spirit = "Vengeful_Spirit";
         public const string Shade_Soul = "Shade_Soul";
@@ -70,21 +69,13 @@ namespace ItemChanger
         public const string Queen_Fragment = "Queen_Fragment";
         public const string King_Fragment = "King_Fragment";
         public const string Void_Heart = "Void_Heart";
-        public const string Dreamshield = "Dreamshield";
-        public const string Weaversong = "Weaversong";
-        public const string Grimmchild = "Grimmchild";
-        public const string Unbreakable_Heart = "Unbreakable_Heart";
-        public const string Unbreakable_Greed = "Unbreakable_Greed";
-        public const string Unbreakable_Strength = "Unbreakable_Strength";
         public const string City_Crest = "City_Crest";
         public const string Tram_Pass = "Tram_Pass";
         public const string Simple_Key_Basin = "Simple_Key-Basin";
         public const string Simple_Key_City = "Simple_Key-City";
-        public const string Simple_Key_Lurker = "Simple_Key-Lurker";
         public const string Shopkeepers_Key = "Shopkeeper's_Key";
         public const string Love_Key = "Love_Key";
         public const string Kings_Brand = "King's_Brand";
-        public const string Godtuner = "Godtuner";
         public const string Collectors_Map = "Collector's_Map";
         public const string Mask_Shard_Seer = "Mask_Shard-Seer";
         public const string Mask_Shard_5_Grubs = "Mask_Shard-5_Grubs";
@@ -108,7 +99,6 @@ namespace ItemChanger
         public const string Charm_Notch_Shrumal_Ogres = "Charm_Notch-Shrumal_Ogres";
         public const string Charm_Notch_Fog_Canyon = "Charm_Notch-Fog_Canyon";
         public const string Charm_Notch_Colosseum = "Charm_Notch-Colosseum";
-        public const string Charm_Notch_Grimm = "Charm_Notch-Grimm";
         public const string Pale_Ore_Basin = "Pale_Ore-Basin";
         public const string Pale_Ore_Crystal_Peak = "Pale_Ore-Crystal_Peak";
         public const string Pale_Ore_Nosk = "Pale_Ore-Nosk";
@@ -123,11 +113,6 @@ namespace ItemChanger
         public const string Geo_Chest_Resting_Grounds = "Geo_Chest-Resting_Grounds";
         public const string Geo_Chest_Crystal_Peak = "Geo_Chest-Crystal_Peak";
         public const string Geo_Chest_Weavers_Den = "Geo_Chest-Weavers_Den";
-        public const string Geo_Chest_Junk_Pit_1 = "Geo_Chest-Junk_Pit_1";
-        public const string Geo_Chest_Junk_Pit_2 = "Geo_Chest-Junk_Pit_2";
-        public const string Geo_Chest_Junk_Pit_3 = "Geo_Chest-Junk_Pit_3";
-        public const string Geo_Chest_Junk_Pit_5 = "Geo_Chest-Junk_Pit_5";
-        public const string Lumafly_Escape_Junk_Pit_Chest_4 = "Lumafly_Escape-Junk_Pit_Chest_4";
         public const string Rancid_Egg_Grubs = "Rancid_Egg-Grubs";
         public const string Rancid_Egg_Sheo = "Rancid_Egg-Sheo";
         public const string Rancid_Egg_Fungal_Core = "Rancid_Egg-Fungal_Core";
@@ -185,7 +170,6 @@ namespace ItemChanger
         public const string Kings_Idol_Glade_of_Hope = "King's_Idol-Glade_of_Hope";
         public const string Kings_Idol_Dung_Defender = "King's_Idol-Dung_Defender";
         public const string Kings_Idol_Great_Hopper = "King's_Idol-Great_Hopper";
-        public const string Kings_Idol_Pale_Lurker = "King's_Idol-Pale_Lurker";
         public const string Kings_Idol_Deepnest = "King's_Idol-Deepnest";
         public const string Arcane_Egg_Seer = "Arcane_Egg-Seer";
         public const string Arcane_Egg_Lifeblood_Core = "Arcane_Egg-Lifeblood_Core";
@@ -216,8 +200,6 @@ namespace ItemChanger
         public const string Boss_Essence_Failed_Champion = "Boss_Essence-Failed_Champion";
         public const string Boss_Essence_Soul_Tyrant = "Boss_Essence-Soul_Tyrant";
         public const string Boss_Essence_Lost_Kin = "Boss_Essence-Lost_Kin";
-        public const string Boss_Essence_White_Defender = "Boss_Essence-White_Defender";
-        public const string Boss_Essence_Grey_Prince_Zote = "Boss_Essence-Grey_Prince_Zote";
         public const string Grub_Crossroads_Acid = "Grub-Crossroads_Acid";
         public const string Grub_Crossroads_Center = "Grub-Crossroads_Center";
         public const string Grub_Crossroads_Stag = "Grub-Crossroads_Stag";
@@ -291,7 +273,6 @@ namespace ItemChanger
         public const string Kings_Station_Stag = "King's_Station_Stag";
         public const string Resting_Grounds_Stag = "Resting_Grounds_Stag";
         public const string Distant_Village_Stag = "Distant_Village_Stag";
-        public const string Hidden_Station_Stag = "Hidden_Station_Stag";
         public const string Stag_Nest_Stag = "Stag_Nest_Stag";
         public const string Lifeblood_Cocoon_Kings_Pass = "Lifeblood_Cocoon-King's_Pass";
         public const string Lifeblood_Cocoon_Ancestral_Mound = "Lifeblood_Cocoon-Ancestral_Mound";
@@ -301,22 +282,11 @@ namespace ItemChanger
         public const string Lifeblood_Cocoon_Failed_Tramway = "Lifeblood_Cocoon-Failed_Tramway";
         public const string Lifeblood_Cocoon_Galien = "Lifeblood_Cocoon-Galien";
         public const string Lifeblood_Cocoon_Kingdoms_Edge = "Lifeblood_Cocoon-Kingdom's_Edge";
-        public const string Grimmkin_Flame_City_Storerooms = "Grimmkin_Flame-City_Storerooms";
-        public const string Grimmkin_Flame_Greenpath = "Grimmkin_Flame-Greenpath";
-        public const string Grimmkin_Flame_Crystal_Peak = "Grimmkin_Flame-Crystal_Peak";
-        public const string Grimmkin_Flame_Kings_Pass = "Grimmkin_Flame-King's_Pass";
-        public const string Grimmkin_Flame_Resting_Grounds = "Grimmkin_Flame-Resting_Grounds";
-        public const string Grimmkin_Flame_Kingdoms_Edge = "Grimmkin_Flame-Kingdom's_Edge";
-        public const string Grimmkin_Flame_Fungal_Core = "Grimmkin_Flame-Fungal_Core";
-        public const string Grimmkin_Flame_Ancient_Basin = "Grimmkin_Flame-Ancient_Basin";
-        public const string Grimmkin_Flame_Hive = "Grimmkin_Flame-Hive";
-        public const string Grimmkin_Flame_Brumm = "Grimmkin_Flame-Brumm";
         public const string Hunters_Journal = "Hunter's_Journal";
         public const string Journal_Entry_Void_Tendrils = "Journal_Entry-Void_Tendrils";
         public const string Journal_Entry_Charged_Lumafly = "Journal_Entry-Charged_Lumafly";
         public const string Journal_Entry_Goam = "Journal_Entry-Goam";
         public const string Journal_Entry_Garpede = "Journal_Entry-Garpede";
-        public const string Journal_Entry_Seal_of_Binding = "Journal_Entry-Seal_of_Binding";
         public const string Elevator_Pass = "Elevator_Pass";
         public const string Split_Mothwing_Cloak = "Split_Mothwing_Cloak";
         public const string Left_Mantis_Claw = "Left_Mantis_Claw";
@@ -474,8 +444,6 @@ namespace ItemChanger
         public const string Geo_Rock_Love_Key = "Geo_Rock-Love_Key";
         public const string Geo_Rock_Love_Key_Dupe = "Geo_Rock-Love_Key_Dupe";
         public const string Geo_Rock_Queens_Gardens_Above_Marmu = "Geo_Rock-Queen's_Gardens_Above_Marmu";
-        public const string Geo_Rock_Pale_Lurker = "Geo_Rock-Pale_Lurker";
-        public const string Geo_Rock_Godhome_Pipeway = "Geo_Rock-Godhome_Pipeway";
         public const string Geo_Rock_Hive_Entrance = "Geo_Rock-Hive_Entrance";
         public const string Geo_Rock_Hive_Outside_Bench = "Geo_Rock-Hive_Outside_Bench";
         public const string Geo_Rock_Hive_Below_Root = "Geo_Rock-Hive_Below_Root";
@@ -510,8 +478,6 @@ namespace ItemChanger
         public const string Geo_Rock_Resting_Grounds_Catacombs_Left_Dupe = "Geo_Rock-Resting_Grounds_Catacombs_Left_Dupe";
         public const string Geo_Rock_Resting_Grounds_Catacombs_Left = "Geo_Rock-Resting_Grounds_Catacombs_Left";
         public const string Geo_Rock_Overgrown_Mound = "Geo_Rock-Overgrown_Mound";
-        public const string Geo_Rock_Fluke_Hermit_Dupe = "Geo_Rock-Fluke_Hermit_Dupe";
-        public const string Geo_Rock_Fluke_Hermit = "Geo_Rock-Fluke_Hermit";
         public const string Geo_Rock_Pleasure_House = "Geo_Rock-Pleasure_House";
         public const string Geo_Rock_City_of_Tears_Quirrel = "Geo_Rock-City_of_Tears_Quirrel";
         public const string Geo_Rock_City_of_Tears_Lemm = "Geo_Rock-City_of_Tears_Lemm";
@@ -589,14 +555,6 @@ namespace ItemChanger
         public const string Soul_Totem_White_Palace_Left = "Soul_Totem-White_Palace_Left";
         public const string Soul_Totem_White_Palace_Final = "Soul_Totem-White_Palace_Final";
         public const string Soul_Totem_White_Palace_Right = "Soul_Totem-White_Palace_Right";
-        public const string Soul_Totem_Path_of_Pain_Below_Lever = "Soul_Totem-Path_of_Pain_Below_Lever";
-        public const string Soul_Totem_Path_of_Pain_Left_of_Lever = "Soul_Totem-Path_of_Pain_Left_of_Lever";
-        public const string Soul_Totem_Path_of_Pain_Entrance = "Soul_Totem-Path_of_Pain_Entrance";
-        public const string Soul_Totem_Path_of_Pain_Second = "Soul_Totem-Path_of_Pain_Second";
-        public const string Soul_Totem_Path_of_Pain_Hidden = "Soul_Totem-Path_of_Pain_Hidden";
-        public const string Soul_Totem_Path_of_Pain_Below_Thornskip = "Soul_Totem-Path_of_Pain_Below_Thornskip";
-        public const string Soul_Totem_Path_of_Pain_Final = "Soul_Totem-Path_of_Pain_Final";
-        public const string Soul_Totem_Pale_Lurker = "Soul_Totem-Pale_Lurker";
         public const string Lore_Tablet_City_Entrance = "Lore_Tablet-City_Entrance";
         public const string Lore_Tablet_Pleasure_House = "Lore_Tablet-Pleasure_House";
         public const string Lore_Tablet_Sanctum_Entrance = "Lore_Tablet-Sanctum_Entrance";
@@ -629,6 +587,5 @@ namespace ItemChanger
         public const string Lore_Tablet_Kingdoms_Edge = "Lore_Tablet-Kingdom's_Edge";
         public const string Lore_Tablet_Palace_Workshop = "Lore_Tablet-Palace_Workshop";
         public const string Lore_Tablet_Palace_Throne = "Lore_Tablet-Palace_Throne";
-        public const string Lore_Tablet_Path_of_Pain_Entrance = "Lore_Tablet-Path_of_Pain_Entrance";
     }
 }

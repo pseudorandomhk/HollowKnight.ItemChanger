@@ -11,5 +11,9 @@ namespace ItemChanger
         {
             return ObjectCache.SmallPlatform;
         }
+
+        public virtual bool Equals(SmallPlatform other) => ReferenceEquals(this, other) || base.Equals(other);
+
+        public override int GetHashCode() => base.GetHashCode();
     }
 }

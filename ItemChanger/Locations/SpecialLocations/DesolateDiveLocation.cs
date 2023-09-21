@@ -12,6 +12,7 @@ namespace ItemChanger.Locations.SpecialLocations
         protected override void OnLoad()
         {
             base.OnLoad();
+            Events.AddFsmEdit(UnsafeSceneName, new("Roof Collider Battle", "Control"), EditRoofColliderBattleControl);
             Events.AddFsmEdit(UnsafeSceneName, new("Quake Pickup", "Pickup"), EditQuakePickup);
             Events.AddFsmEdit(UnsafeSceneName, new("BG Control"), EditBGControl);
             Events.AddFsmEdit(UnsafeSceneName, new("Destroy if Quake"), EditDestroyIfQuake);
@@ -20,9 +21,16 @@ namespace ItemChanger.Locations.SpecialLocations
         protected override void OnUnload()
         {
             base.OnUnload();
+            Events.RemoveFsmEdit(UnsafeSceneName, new("Roof Collider Battle", "Control"), EditRoofColliderBattleControl);
             Events.RemoveFsmEdit(UnsafeSceneName, new("Quake Pickup", "Pickup"), EditQuakePickup);
             Events.RemoveFsmEdit(UnsafeSceneName, new("BG Control"), EditBGControl);
             Events.RemoveFsmEdit(UnsafeSceneName, new("Destroy if Quake"), EditDestroyIfQuake);
+        }
+
+        private void EditRoofColliderBattleControl(PlayMakerFSM fsm)
+        {
+            FsmState activateSelf = fsm.GetState("Activate Self?");
+            activateSelf.AddFirstAction(new DelegateBoolTest(() => HeroController.instance.gameObject.GetComponent<Rigidbody2D>().position.y > 29f, "FINISHED", null));
         }
 
         private void EditQuakePickup(PlayMakerFSM fsm)

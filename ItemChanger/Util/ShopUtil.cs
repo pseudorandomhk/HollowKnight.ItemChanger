@@ -1,4 +1,8 @@
 ﻿using ItemChanger.Components;
+using ItemChanger.Extensions;
+using ItemChanger.FsmStateActions;
+using Modding;
+using Modding.Utils;
 using System.Reflection;
 using TMPro;
 
@@ -6,28 +10,32 @@ namespace ItemChanger.Util
 {
     public static class ShopUtil
     {
-        private static readonly FieldInfo spawnedStockField = typeof(ShopMenuStock).GetField("spawnedStock", BindingFlags.NonPublic | BindingFlags.Instance);
-        private static readonly MethodInfo spawnStockMethod = typeof(ShopMenuStock).GetMethod("SpawnStock", BindingFlags.NonPublic | BindingFlags.Instance);
+        //private static readonly FieldInfo spawnedStockField = typeof(ShopMenuStock).GetField("spawnedStock", BindingFlags.NonPublic | BindingFlags.Instance);
+        //private static readonly MethodInfo spawnStockMethod = typeof(ShopMenuStock).GetMethod("SpawnStock", BindingFlags.NonPublic | BindingFlags.Instance);
         private static readonly FieldInfo itemCostField = typeof(ShopItemStats).GetField("itemCost", BindingFlags.NonPublic | BindingFlags.Instance);
 
         public static void HookShops()
         {
             On.ShopMenuStock.BuildItemList += BuildItemList;
             On.ShopMenuStock.StockLeft += StockLeft;
-            On.ShopItemStats.OnEnable += OnEnable;
+            //HookRuntimePatches.PatchFsms += OnEnable;
+            Events.AddFsmEdit(new("Set Amount"), OnEnable);
         }
 
-        private static void OnEnable(On.ShopItemStats.orig_OnEnable orig, ShopItemStats self)
+        private static void OnEnable(PlayMakerFSM fsm)
         {
-            orig(self);
-            var mod = self.gameObject.GetComponent<ModShopItemStats>();
+            var mod = fsm.gameObject.GetComponent<ModShopItemStats>();
+            if (!mod)
+                return;
+
+            var self = fsm.gameObject.GetComponent<ShopItemStats>();
             if (mod)
             {
                 Cost? cost = mod.cost;
                 CostDisplayer? displayer = mod.costDisplayer;
                 if (cost != null)
                 {
-                    if (self.dungDiscount && PlayerData.instance.GetBool(nameof(PlayerData.equippedCharm_10)))
+                    if (fsm.FsmVariables.GetFsmBool("Dung Discount").Value && PlayerData.instance.GetBool(nameof(PlayerData.equippedCharm_10)))
                     {
                         cost.DiscountRate = 0.8f;
                     }
@@ -37,18 +45,26 @@ namespace ItemChanger.Util
                     }
                 }
 
-                if (cost == null || cost.Paid || cost.CanPay())
+                //if (cost == null || cost.Paid || cost.CanPay())
+                //{
+                //    self.transform.Find("Geo Sprite").gameObject.GetComponent<SpriteRenderer>().color = self.activeColour;
+                //    self.transform.Find("Item Sprite").gameObject.GetComponent<SpriteRenderer>().color = self.activeColour;
+                //    self.transform.Find("Item cost").gameObject.GetComponent<TextMeshPro>().color = self.activeColour;
+                //}
+                //else
+                //{
+                //    self.transform.Find("Geo Sprite").gameObject.GetComponent<SpriteRenderer>().color = self.inactiveColour;
+                //    self.transform.Find("Item Sprite").gameObject.GetComponent<SpriteRenderer>().color = self.inactiveColour;
+                //    self.transform.Find("Item cost").gameObject.GetComponent<TextMeshPro>().color = self.inactiveColour;
+                //}
+                var initActions = fsm.GetState("Init").Actions;
+                FsmStateAction origCostCheck = initActions[initActions.Length - 1];
+                FsmStateAction newCostCheck = new Lambda(() =>
                 {
-                    self.transform.Find("Geo Sprite").gameObject.GetComponent<SpriteRenderer>().color = self.activeColour;
-                    self.transform.Find("Item Sprite").gameObject.GetComponent<SpriteRenderer>().color = self.activeColour;
-                    self.transform.Find("Item cost").gameObject.GetComponent<TextMeshPro>().color = self.activeColour;
-                }
-                else
-                {
-                    self.transform.Find("Geo Sprite").gameObject.GetComponent<SpriteRenderer>().color = self.inactiveColour;
-                    self.transform.Find("Item Sprite").gameObject.GetComponent<SpriteRenderer>().color = self.inactiveColour;
-                    self.transform.Find("Item cost").gameObject.GetComponent<TextMeshPro>().color = self.inactiveColour;
-                }
+                    if (cost == null || cost.Paid || cost.CanPay()) return;
+                    origCostCheck.OnEnter();
+                });
+                initActions[initActions.Length - 1] = newCostCheck;
 
                 int geo;
                 if (mod.placement is AbstractPlacement p && !p.HasTag<Tags.DisableCostPreviewTag>() && !mod.item.HasTag<Tags.DisableCostPreviewTag>()
@@ -61,7 +77,8 @@ namespace ItemChanger.Util
                     geo = 0;
                 }
                 self.SetCost(geo);
-                ((GameObject)itemCostField.GetValue(self)).GetComponent<TextMeshPro>().text = geo.ToString();
+                fsm.FsmVariables.FindFsmBool("Trinket").Value = false;
+                //((GameObject)itemCostField.GetValue(self)).GetComponent<TextMeshPro>().text = geo.ToString();
             }
         }
 
@@ -74,24 +91,25 @@ namespace ItemChanger.Util
         {
             On.ShopMenuStock.BuildItemList -= BuildItemList;
             On.ShopMenuStock.StockLeft -= StockLeft;
-            On.ShopItemStats.OnEnable -= OnEnable;
+            HookRuntimePatches.PatchFsms -= OnEnable;
+
         }
 
-        public static Dictionary<GameObject, GameObject> GetSpawnedStock(this ShopMenuStock stock)
-        {
-            var dict = spawnedStockField.GetValue(stock);
-            if (dict == null)
-            {
-                spawnStockMethod.Invoke(stock, new object[0]);
-                spawnedStockField.GetValue(stock);
-            }
+        //public static Dictionary<GameObject, GameObject> GetSpawnedStock(this ShopMenuStock stock)
+        //{
+        //    var dict = spawnedStockField.GetValue(stock);
+        //    if (dict == null)
+        //    {
+        //        spawnStockMethod.Invoke(stock, new object[0]);
+        //        spawnedStockField.GetValue(stock);
+        //    }
 
-            return (Dictionary<GameObject, GameObject>)spawnedStockField.GetValue(stock);
-        }
+        //    return (Dictionary<GameObject, GameObject>)spawnedStockField.GetValue(stock);
+        //}
 
         private static void BuildItemList(On.ShopMenuStock.orig_BuildItemList orig, ShopMenuStock self)
         {
-            Dictionary<GameObject, GameObject> spawnedStock = self.GetSpawnedStock();
+            //Dictionary<GameObject, GameObject> spawnedStock = self.GetSpawnedStock();
 
             self.itemCount = -1;
             float num = 0f;
@@ -101,12 +119,9 @@ namespace ItemChanger.Util
                 if (ShopMenuItemAppears(self.stock[i]))
                 {
                     self.itemCount++;
-                    if (!spawnedStock.TryGetValue(self.stock[i], out GameObject gameObject))
-                    {
-                        gameObject = GameObject.Instantiate(self.stock[i]);
-                        gameObject.SetActive(false);
-                        spawnedStock.Add(self.stock[i], gameObject);
-                    }
+                    var gameObject = GameObject.Instantiate(self.stock[i]);
+                    gameObject.SetActive(false);
+
                     if (gameObject.GetComponent<ModShopItemStats>() is ModShopItemStats mod && mod.item == null)
                     {
                         // Instantiate can't copy custom classes
@@ -142,17 +157,17 @@ namespace ItemChanger.Util
             ModShopItemStats mod = shopItem.GetComponent<ModShopItemStats>();
 
             string requiredPD = stats.requiredPlayerDataBool;
-            string removalPD = stats.removalPlayerDataBool;
+            //string removalPD = stats.removalPlayerDataBool;
             string PDBool = stats.playerDataBoolName;
 
-            bool remove = PDTest(removalPD) ?? false;
-            if (mod != null)
-            {
-                foreach (var t in mod.item.GetTags<Tags.IShopRemovalTag>())
-                {
-                    remove |= t.Remove;
-                }
-            }
+            //bool remove = PDTest(removalPD) ?? false;
+            //if (mod != null)
+            //{
+            //    foreach (var t in mod.item.GetTags<Tags.IShopRemovalTag>())
+            //    {
+            //        remove |= t.Remove;
+            //    }
+            //}
 
             bool meetsRequirement = PDTest(requiredPD) ?? true;
             if (mod != null)
@@ -165,7 +180,7 @@ namespace ItemChanger.Util
 
             bool obtained = mod?.item?.IsObtained() ?? PDTest(PDBool) ?? false;
 
-            return !obtained && !remove && meetsRequirement;
+            return !obtained && meetsRequirement;
 
             bool? PDTest(string boolName)
             {

@@ -315,8 +315,6 @@
         DreamWielder = dreamReward4,
         dreamReward5 = 1 << 4,
         VesselFragment = dreamReward5,
-        dreamReward5b = 1 << 5,
-        DreamGate = dreamReward5b,
         dreamReward6 = 1 << 6,
         ArcaneEgg = dreamReward6,
         dreamReward7 = 1 << 7,

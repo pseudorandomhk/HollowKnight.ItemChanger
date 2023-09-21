@@ -15,5 +15,10 @@
             box.size = new(Width, Height);
             return go;
         }
+
+        public virtual bool Equals(EnemyBlockerDeployer other) => ReferenceEquals(this, other) ||
+            (base.Equals(other) && this.Width == other.Width && this.Height == other.Height);
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Width.GetHashCode(), Height.GetHashCode());
     }
 }

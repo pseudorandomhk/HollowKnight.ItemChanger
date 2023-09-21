@@ -25,10 +25,10 @@ namespace ItemChanger.Modules
         {
             if (!fsm.gameObject.name.StartsWith("Blocker")) return;
 
-            HealthManager hm = fsm.GetComponent<HealthManager>();
+            PlayMakerFSM hm = fsm.gameObject.LocateMyFSM("health_manager_enemy");
             if (hm != null)
             {
-                hm.hp = cap;
+                hm.FsmVariables.GetFsmInt("HP").Value = cap;
             }
             
             // remove VS check from baldur spawn

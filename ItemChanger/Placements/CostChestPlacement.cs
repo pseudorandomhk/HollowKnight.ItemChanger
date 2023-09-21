@@ -4,6 +4,7 @@ using ItemChanger.Extensions;
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Locations;
 using ItemChanger.Util;
+using static Shims.NET.System.Text.StringBuilder;
 
 namespace ItemChanger.Placements
 {

@@ -15,5 +15,10 @@ namespace ItemChanger.Deployers
             SoulTotemSubtype e = SoulTotemSubtype;
             return ObjectCache.SoulTotem(ref e);
         }
+
+        public virtual bool Equals(SoulTotemDeployer other) => ReferenceEquals(this, other) ||
+            (base.Equals(other) && this.SoulTotemSubtype == other.SoulTotemSubtype);
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), SoulTotemSubtype.GetHashCode());
     }
 }

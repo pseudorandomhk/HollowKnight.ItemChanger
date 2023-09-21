@@ -1,4 +1,6 @@
-﻿namespace ItemChanger.Internal.Preloaders
+﻿using static Shims.NET.System.IO.Stream;
+
+namespace ItemChanger.Internal.Preloaders
 {
     public class SoulTotemPreloader : Preloader
     {
@@ -17,7 +19,7 @@
                 yield return (SceneNames.Crossroads_ShamanTemple, "Soul Totem 2");
                 yield return (SceneNames.Ruins1_32, "Soul Totem 3");
                 yield return (SceneNames.White_Palace_02, "Soul Totem white");
-                yield return (SceneNames.White_Palace_18, "Soul Totem white_Infinte");
+                //yield return (SceneNames.White_Palace_18, "Soul Totem white_Infinte");
             }
         }
 
@@ -35,8 +37,12 @@
                     [SoulTotemSubtype.F] = objectsByScene[SceneNames.Crossroads_ShamanTemple]["Soul Totem 2"],
                     [SoulTotemSubtype.G] = objectsByScene[SceneNames.Ruins1_32]["Soul Totem 3"],
                     [SoulTotemSubtype.Palace] = objectsByScene[SceneNames.White_Palace_02]["Soul Totem white"],
-                    [SoulTotemSubtype.PathOfPain] = objectsByScene[SceneNames.White_Palace_18]["Soul Totem white_Infinte"]
+                    [SoulTotemSubtype.PathOfPain] = objectsByScene[SceneNames.White_Palace_02]["Soul Totem white"]
+                    //[SoulTotemSubtype.PathOfPain] = objectsByScene[SceneNames.White_Palace_18]["Soul Totem white_Infinte"]
                 };
+
+                _soulTotems[SoulTotemSubtype.PathOfPain].GetComponent<SpriteRenderer>().sprite = SpriteManager.Instance.GetSprite("pop_totem_unlit");
+
                 foreach (GameObject g in _soulTotems.Values) UObject.DontDestroyOnLoad(g);
             }
             else if (PreloadLevel == PreloadLevel.Reduced)

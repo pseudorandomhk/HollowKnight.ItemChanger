@@ -20,13 +20,13 @@ namespace ItemChanger.Modules
         public override void Initialize()
         {
             Events.OnBeginSceneTransition += BuildPassage;
-            Events.AddFsmEdit(SceneNames.Town, new("door_jiji", "Set Jinn"), DisableSetJinn);
+            Events.AddFsmEdit(SceneNames.Town, new("door_jiji", "Steel Soul Detour"), DisableSetJinn);
         }
 
         public override void Unload()
         {
             Events.OnBeginSceneTransition -= BuildPassage;
-            Events.RemoveFsmEdit(SceneNames.Town, new("door_jiji", "Set Jinn"), DisableSetJinn);
+            Events.RemoveFsmEdit(SceneNames.Town, new("door_jiji", "Steel Soul Detour"), DisableSetJinn);
         }
 
         private void BuildPassage(Transition t)
@@ -38,6 +38,7 @@ namespace ItemChanger.Modules
 
             if (t.SceneName == SceneNames.Room_Ouiji || t.SceneName == SceneNames.Room_Jinn)
             {
+                Log("Creating jiji/jinn passage");
                 Transition jiji = new(SceneNames.Room_Ouiji, "left1");
                 Transition jinn = new(SceneNames.Room_Jinn, "left1");
 
@@ -60,7 +61,8 @@ namespace ItemChanger.Modules
         {
             if (HandleSteelSoul)
             {
-                fsm.GetState("Check").ClearTransitions();
+                // FeelsPKMan
+                fsm.GetState("Check ").ClearTransitions();
             }
         }
     }

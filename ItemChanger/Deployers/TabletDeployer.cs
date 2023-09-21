@@ -22,5 +22,10 @@
             Container.GetContainer(Container.Tablet)!.ApplyTargetContext(obj, X, Y, 0);
             return obj;
         }
+
+        public virtual bool Equals(TabletDeployer other) => ReferenceEquals(this, other) ||
+            (base.Equals(other) && ReferenceEquals(this.Text, other.Text));
+
+        public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Text?.GetHashCode());
     }
 }

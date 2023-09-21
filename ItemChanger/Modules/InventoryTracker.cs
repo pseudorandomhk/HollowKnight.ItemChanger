@@ -69,18 +69,6 @@ namespace ItemChanger.Modules
                 }
             }
 
-            if (TrackGrimmkinFlames && PlayerData.instance.GetInt(nameof(PlayerData.grimmChildLevel)) <= 3)
-            {
-                if (mods.Get<GrimmkinFlameManager>() is GrimmkinFlameManager gfm)
-                {
-                    sb.AppendFormat(Language.Language.Get("TRACKER_FLAMES", "Fmt"), gfm.flameBalance, gfm.cumulativeFlamesCollected).AppendLine();
-                }
-                else
-                {
-                    sb.AppendFormat(Language.Language.Get("TRACKER_FLAMES_NO_GFM", "Fmt"), PlayerData.instance.GetInt(nameof(PlayerData.flamesCollected))).AppendLine();
-                } 
-            }
-
             sb.AppendFormat(Language.Language.Get("TRACKER_GRUBS", "Fmt"), PlayerData.instance.GetInt(nameof(PlayerData.grubsCollected))).AppendLine();
 
             int dreamers = Ref.PD.GetInt(nameof(PlayerData.guardiansDefeated));
@@ -105,7 +93,7 @@ namespace ItemChanger.Modules
                         (monomon, Language.Language.Get("TRACKER_MONOMON", "IC")),
                         (herrah, Language.Language.Get("TRACKER_HERRAH", "IC")),
                         (dupe, Language.Language.Get("TRACKER_DUPLICATE_DREAMERS", "IC")),
-                    }.Where(p => p.Item1).Select(p => p.Item2)));
+                    }.Where(p => p.Item1).Select(p => p.Item2).ToArray()));
             }
             OnGenerateFocusDesc?.Invoke(sb);
 

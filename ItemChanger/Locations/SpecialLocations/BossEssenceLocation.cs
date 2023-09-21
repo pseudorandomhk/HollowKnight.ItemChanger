@@ -24,6 +24,7 @@ namespace ItemChanger.Locations.SpecialLocations
 
         private void EditBossConvo(PlayMakerFSM fsm)
         {
+            // only gpz and white defender use "Award Orbs"
             if (fsmName == "Award Orbs")
             {
                 // Add give

@@ -18,6 +18,7 @@
 
         private void PreventZoteDeathCheck(PlayMakerFSM fsm)
         {
+            ItemChangerMod.instance.Log($"checkzotedeath on {fsm.gameObject.scene.name}:{fsm.gameObject}");
             UnityEngine.Object.Destroy(fsm);
         }
     }

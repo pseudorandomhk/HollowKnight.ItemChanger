@@ -27,7 +27,7 @@ namespace ItemChanger.Items
         public override void GiveImmediate(GiveInfo info)
         {
             PlayerData.instance.IntAdd(nameof(PlayerData.dreamOrbs), amount);
-            EventRegister.SendEvent("DREAM ORB COLLECT");
+            GameCameras.instance.hudCanvas.transform.Find("Extras").Find("Dream Nail").gameObject.LocateMyFSM("Control").SendEvent("DREAM ORB COLLECT");
         }
     }
 }

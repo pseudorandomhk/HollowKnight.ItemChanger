@@ -30,7 +30,9 @@ namespace ItemChanger.Locations.SpecialLocations
             }
             else if (previousScene == SceneNames.Deepnest_Spider_Town)
             {
-                Events.AddSceneChangeEdit(previousScene, HandleHerrahDeactivation);
+                //Events.AddSceneChangeEdit(previousScene, HandleHerrahDeactivation);
+                // 1028 herrah is like lurien
+                Events.AddFsmEdit(previousScene, new("Dreamer Hegemol", "FSM"), ReplaceCheck);
             }
             Events.AddFsmEdit(previousScene, new("Dream Enter", "Control"), MakeHintBox);
             try
@@ -61,7 +63,8 @@ namespace ItemChanger.Locations.SpecialLocations
             }
             else if (previousScene == SceneNames.Deepnest_Spider_Town)
             {
-                Events.RemoveSceneChangeEdit(previousScene, HandleHerrahDeactivation);
+                //Events.RemoveSceneChangeEdit(previousScene, HandleHerrahDeactivation);
+                Events.RemoveFsmEdit(previousScene, new("Dreamer Hegemol", "FSM"), ReplaceCheck);
             }
             Events.RemoveFsmEdit(previousScene, new("Dream Enter", "Control"), MakeHintBox);
             try
@@ -90,7 +93,7 @@ namespace ItemChanger.Locations.SpecialLocations
             GameObject? herrah = to.FindGameObject("Dreamer Hegemol");
             if (herrah != null)
             {
-                UObject.Destroy(herrah.GetComponent<DeactivateIfPlayerdataTrue>());
+                UObject.Destroy(herrah.LocateMyFSM("FSM"));
                 if (Placement.AllObtained()) herrah.SetActive(false);
                 else herrah.SetActive(true);
             }

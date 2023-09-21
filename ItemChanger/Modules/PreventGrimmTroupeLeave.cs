@@ -1,4 +1,5 @@
-﻿using ItemChanger.Extensions;
+﻿#if FALSE
+using ItemChanger.Extensions;
 using Modding;
 
 namespace ItemChanger.Modules
@@ -30,10 +31,9 @@ namespace ItemChanger.Modules
         {
             return name switch
             {
-                nameof(PlayerData.troupeInTown) => PlayerData.instance.GetBool(name) || orig,
-                nameof(PlayerData.divineInTown) => PlayerData.instance.GetBool(name) || orig,
                 _ => orig
             };
         }
     }
 }
+#endif

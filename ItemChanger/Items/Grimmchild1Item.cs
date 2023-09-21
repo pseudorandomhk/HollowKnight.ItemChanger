@@ -1,4 +1,5 @@
-﻿namespace ItemChanger.Items
+﻿#if FALSE
+namespace ItemChanger.Items
 {
     /// <summary>
     /// Item which gives Grimmchild and activates the Nightmare Lantern.
@@ -23,3 +24,4 @@
         }
     }
 }
+#endif

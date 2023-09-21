@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <ProjectGuid>{E4EF2EA1-3DBF-4442-B904-51F72F39758B}</ProjectGuid>
-    <TargetFramework>net472</TargetFramework>
+    <TargetFramework>net35</TargetFramework>
     <RootNamespace>ItemChanger</RootNamespace>
     <AssemblyTitle>ItemChanger</AssemblyTitle>
     <AssemblyVersion>2.1.2</AssemblyVersion>
@@ -13,7 +13,7 @@
     <ImplicitUsings>true</ImplicitUsings>
     <Nullable>annotations</Nullable>
     <NoWarn>1701;1702;CS1591;IDE0018</NoWarn>
-    <HollowKnightRefs>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed</HollowKnightRefs>
+    <HollowKnightRefs>C:\Program Files (x86)\Steam\steamapps\common\Hollow Knight 1028\hollow_knight_Data\Managed</HollowKnightRefs>
   </PropertyGroup>
 
   <Import Project="LocalOverrides.targets" Condition="Exists('LocalOverrides.targets')" />
@@ -22,10 +22,10 @@
     <Using Remove="System.Net.Http" />
     <Using Remove="System.Threading" />
     <Using Remove="System.Threading.Tasks" />
-    <PackageReference Include="PolySharp" Version="1.8.0">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
+<!--    <PackageReference Include="PolySharp" Version="1.8.0">-->
+<!--      <PrivateAssets>all</PrivateAssets>-->
+<!--      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>-->
+<!--    </PackageReference>-->
     <Using Include="ItemChanger.LogHelper" Static="true" />
     <Using Include="UnityEngine" />
     <Using Include="UnityEngine.Object" Alias="UObject" />
@@ -75,33 +75,33 @@
     <Reference Include="UnityEngine">
       <HintPath>$(HollowKnightRefs)\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.AudioModule">
-      <HintPath>$(HollowKnightRefs)\UnityEngine.AudioModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(HollowKnightRefs)\UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ImageConversionModule">
-      <HintPath>$(HollowKnightRefs)\UnityEngine.ImageConversionModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.JSONSerializeModule">
-      <HintPath>$(HollowKnightRefs)\UnityEngine.JSONSerializeModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.ParticleSystemModule">
-      <HintPath>$(HollowKnightRefs)\UnityEngine.ParticleSystemModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Physics2DModule">
-      <HintPath>$(HollowKnightRefs)\UnityEngine.Physics2DModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TextRenderingModule">
-      <HintPath>$(HollowKnightRefs)\UnityEngine.TextRenderingModule.dll</HintPath>
-    </Reference>
+<!--    <Reference Include="UnityEngine.AudioModule">-->
+<!--      <HintPath>$(HollowKnightRefs)\UnityEngine.AudioModule.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="UnityEngine.CoreModule">-->
+<!--      <HintPath>$(HollowKnightRefs)\UnityEngine.CoreModule.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="UnityEngine.ImageConversionModule">-->
+<!--      <HintPath>$(HollowKnightRefs)\UnityEngine.ImageConversionModule.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="UnityEngine.JSONSerializeModule">-->
+<!--      <HintPath>$(HollowKnightRefs)\UnityEngine.JSONSerializeModule.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="UnityEngine.ParticleSystemModule">-->
+<!--      <HintPath>$(HollowKnightRefs)\UnityEngine.ParticleSystemModule.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="UnityEngine.Physics2DModule">-->
+<!--      <HintPath>$(HollowKnightRefs)\UnityEngine.Physics2DModule.dll</HintPath>-->
+<!--    </Reference>-->
+<!--    <Reference Include="UnityEngine.TextRenderingModule">-->
+<!--      <HintPath>$(HollowKnightRefs)\UnityEngine.TextRenderingModule.dll</HintPath>-->
+<!--    </Reference>-->
     <Reference Include="UnityEngine.UI">
       <HintPath>$(HollowKnightRefs)\UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UIModule">
-      <HintPath>$(HollowKnightRefs)\UnityEngine.UIModule.dll</HintPath>
-    </Reference>
+<!--    <Reference Include="UnityEngine.UIModule">-->
+<!--      <HintPath>$(HollowKnightRefs)\UnityEngine.UIModule.dll</HintPath>-->
+<!--    </Reference>-->
   </ItemGroup>
   <Target Name="CopyMod" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="$(TargetPath);$(TargetDir)$(TargetName).pdb;$(TargetDir)$(TargetName).xml;$(SolutionDir)README.md" DestinationFolder="$(HollowKnightRefs)\Mods\ItemChanger" SkipUnchangedFiles="true" />

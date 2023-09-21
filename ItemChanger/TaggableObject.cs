@@ -1,6 +1,7 @@
 ﻿using ItemChanger.Tags;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static Shims.NET.System.Enum;
 
 namespace ItemChanger
 {

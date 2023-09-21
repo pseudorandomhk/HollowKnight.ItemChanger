@@ -16,9 +16,10 @@
             }
             catch (Exception) { }
 
+            var lifebloodControl = GameCameras.instance.hudCanvas.transform.FindChild("Health").gameObject.LocateMyFSM("Blue Health Control");
             for (int i = 0; i < amount; i++)
             {
-                EventRegister.SendEvent("ADD BLUE HEALTH");
+                lifebloodControl.SendEvent("ADD BLUE HEALTH");
             }
         }
     }

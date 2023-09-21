@@ -9,8 +9,8 @@ namespace ItemChanger.Internal
         static GameObject DialogueManager => FsmVariables.GlobalVariables.FindFsmGameObject("DialogueManager").Value;
         static PlayMakerFSM BoxOpenFsm => DialogueManager.LocateMyFSM("Box Open");
         static GameObject DialogueText => FsmVariables.GlobalVariables.FindFsmGameObject("DialogueText").Value;
-        static GameObject Arrow => DialogueText.transform.parent.Find("Arrow").gameObject;
-        static GameObject Stop => DialogueText.transform.parent.Find("Stop").gameObject;
+        static GameObject Arrow => DialogueText.transform.Find("Arrow").gameObject;
+        static GameObject Stop => DialogueText.transform.Find("Stop").gameObject;
 
         static DialogueBox DialogueBox => DialogueText.GetComponent<DialogueBox>();
         static DialogueBox DialogueBoxYN => DialogueManager.FindChild("Text YN")!.GetComponent<DialogueBox>();
@@ -38,8 +38,8 @@ namespace ItemChanger.Internal
             yield return new WaitForSeconds(0.5f); // orig: 0.85f
 
             DialogueText.transform.localPosition = new Vector3(0, 2.44f, -1.0f);
-            Stop.transform.localPosition = new Vector3(0, -0.23f, -2.0f);
-            Arrow.transform.localPosition = new Vector3(0, -0.3f, -2.0f);
+            Stop.transform.localPosition = new Vector3(0, -0.23f - 2.44f, -2.0f); // compensate for parent being DialogueText
+            Arrow.transform.localPosition = new Vector3(0, -0.3f - 2.44f, -2.0f);
             DialogueText.GetComponent<TextMeshPro>().alignment = TextAlignmentOptions.Top;
 
             convoEnded = false;
@@ -53,8 +53,8 @@ namespace ItemChanger.Internal
 
             DialogueText.GetComponent<TextMeshPro>().alignment = TextAlignmentOptions.TopLeft;
             DialogueText.transform.localPosition = new Vector3(0, 4.49f, -1.0f);
-            Stop.transform.localPosition = new Vector3(0, 1.695f, -2.0f);
-            Arrow.transform.localPosition = new Vector3(0, 1.695f, -2.0f);
+            Stop.transform.localPosition = new Vector3(0, 1.695f - 4.49f, -2.0f);
+            Arrow.transform.localPosition = new Vector3(0, 1.695f - 4.49f, -2.0f);
         }
 
         public static IEnumerator LoreCoroutine(string text, Action? callback)

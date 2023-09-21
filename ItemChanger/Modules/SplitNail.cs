@@ -2,6 +2,7 @@
 using HutongGames.PlayMaker.Actions;
 using ItemChanger.Extensions;
 using ItemChanger.FsmStateActions;
+using Modding;
 #pragma warning disable IDE1006 // Naming Styles
 
 namespace ItemChanger.Modules
@@ -107,11 +108,11 @@ namespace ItemChanger.Modules
         // additional check if the player is wallsliding (because we want to treat a wallslash as a normal slash)
         private static Direction GetAttackDirection(HeroController hc)
         {
-            if (hc.wallSlidingL)
+            if (ReflectionHelper.GetField<HeroController, bool>(hc, "wallSlidingL"))
             {
                 return Direction.rightward;
             }
-            else if (hc.wallSlidingR)
+            else if (ReflectionHelper.GetField<HeroController, bool>(hc, "wallSlidingR"))
             {
                 return Direction.leftward;
             }
