@@ -42,6 +42,7 @@ namespace ItemChanger.Modules
                     SD.Save("Tutorial_01", "Initial Fall Impact");
                     if (t.GateName == "right1")
                     {
+                        PlayerData.instance.SetBool(nameof(PlayerData.openingCreditsPlayed), true);
                         SD.Save("Tutorial_01", "Door");
                         SD.Save("Tutorial_01", "Collapser Tute 01");
                         SD.Save("Tutorial_01", "Tute Door 1");

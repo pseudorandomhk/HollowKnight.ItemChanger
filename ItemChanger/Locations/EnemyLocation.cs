@@ -51,7 +51,8 @@ namespace ItemChanger.Locations
             }
             else
             {
-                var deathControl = enemy.LocateMyFSM("death_control");
+                // because why would it be consistent?
+                var deathControl = enemy.LocateMyFSM("death_control") ?? hm;
                 deathControl.GetState("Destroy").AddFirstAction(new Lambda(OnDeath));
             }
 

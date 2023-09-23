@@ -204,6 +204,7 @@ namespace ItemChanger
                     self.proxyFSM.SendEvent("HeroCtrl-Respawned");
                     typeof(HeroController).GetMethod("FinishedEnteringScene", BindingFlags.NonPublic | BindingFlags.Instance).Invoke(self, new object[] { true });
                     self.playerData.disablePause = false;
+                    self.AcceptInput();
                     if (sc && sc.def != null && (sc.def.SpecialEffects & SpecialStartEffects.ExtraInvincibility) != 0)
                     {
                         yield return new WaitForSeconds(0.5f);

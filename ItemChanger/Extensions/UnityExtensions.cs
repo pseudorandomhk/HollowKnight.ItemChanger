@@ -128,5 +128,25 @@
 
             return null;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static GameObject? FindTaggedChildInHierarchy(this GameObject g, string tag)
+        {
+            Transform result = g.transform.FindTaggedChildInHierarchyInternal(tag, false);
+            return result != null ? result.gameObject : null;
+        }
+
+        private static Transform? FindTaggedChildInHierarchyInternal(this Transform t, string tag, bool checkSelf)
+        {
+            if (checkSelf && t.CompareTag(tag)) return t;
+            foreach (Transform child in t.transform)
+            {
+                Transform result = child.FindTaggedChildInHierarchyInternal(tag, true);
+                if (result != null) return result;
+            }
+            return null;
+        }
     }
 }

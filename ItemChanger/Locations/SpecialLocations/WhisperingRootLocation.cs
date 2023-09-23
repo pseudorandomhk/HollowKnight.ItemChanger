@@ -50,8 +50,8 @@ namespace ItemChanger.Locations.SpecialLocations
             //On.DreamPlant.CheckOrbs += AfterDreamPlantCheckOrbs;
             //On.DreamPlant.OnTriggerEnter2D += AfterDreamPlantOnTriggerEnter2D;
             //IL.DreamPlantOrb.OnTriggerEnter2D += RemoveOrbEssence;
-            Modding.HookRuntimePatches.PatchFsms += HookRootFsm;
-            Modding.HookRuntimePatches.PatchFsms += HookOrbFsm;
+            Events.AddFsmEdit(new("Dream Plant", "Control"), HookRootFsm);
+            Events.AddFsmEdit(new("Control"), HookOrbFsm);
         }
         private static void UnhookRoots()
         {
@@ -60,14 +60,13 @@ namespace ItemChanger.Locations.SpecialLocations
             //On.DreamPlant.CheckOrbs -= AfterDreamPlantCheckOrbs;
             //On.DreamPlant.OnTriggerEnter2D -= AfterDreamPlantOnTriggerEnter2D;
             //IL.DreamPlantOrb.OnTriggerEnter2D -= RemoveOrbEssence;
-            Modding.HookRuntimePatches.PatchFsms -= HookRootFsm;
-            Modding.HookRuntimePatches.PatchFsms -= HookOrbFsm;
+            Events.RemoveFsmEdit(new("Dream Plant", "Control"), HookRootFsm);
+            Events.RemoveFsmEdit(new("Control"), HookOrbFsm);
         }
 
         private static void HookRootFsm(PlayMakerFSM fsm)
         {
-            if (fsm.gameObject.name != "Dream Plant" || fsm.FsmName != "Control"
-                  || !SubscribedLocations.TryGetValue(fsm.gameObject.scene.name, out WhisperingRootLocation loc))
+            if (!SubscribedLocations.TryGetValue(fsm.gameObject.scene.name, out WhisperingRootLocation loc))
                 return;
 
             fsm.GetState("Init").AddLastAction(new FsmLambda(() =>
@@ -98,7 +97,7 @@ namespace ItemChanger.Locations.SpecialLocations
 
         private static void HookOrbFsm(PlayMakerFSM fsm) 
         {
-            if (fsm.gameObject.tag != "Dream Orb" || fsm.FsmName != "Control"
+            if (fsm.gameObject.FindTaggedChildInHierarchy("Dream Orb") == null
                   || !SubscribedLocations.TryGetValue(fsm.gameObject.scene.name, out WhisperingRootLocation loc))
                 return;
 

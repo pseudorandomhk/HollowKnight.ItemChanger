@@ -204,6 +204,7 @@ namespace ItemChanger
                 ReflectionHelper.GetMethodInfo(typeof(GameManager), nameof(GameManager.ChangeToSceneWithInfo)),
                 HookChangeToScene
             );
+            On.GameManager.LoadScene += HookLoadScene;
             On.GameManager.ResetSemiPersistentItems += OnResetSemiPersistentItems;
             try
             {
@@ -224,6 +225,7 @@ namespace ItemChanger
             On.GameManager.ContinueGame -= OnContinueGame;
             transitionSceneHook.Dispose();
             changeToSceneHook.Dispose();
+            On.GameManager.LoadScene -= HookLoadScene;
             On.GameManager.ResetSemiPersistentItems -= OnResetSemiPersistentItems;
             try
             {
@@ -414,7 +416,7 @@ namespace ItemChanger
                 {
                     LogError($"Error invoking ModHooks.OnNewGame via reflection:\n{e}");
                 }
-                
+
                 self.ContinueGame();
             }
             else
@@ -546,6 +548,21 @@ namespace ItemChanger
         {
             HookTransitionInfo(self, info);
             orig(self, info);
+        }
+
+        private static void HookLoadScene(On.GameManager.orig_LoadScene orig, GameManager self, string targetScene)
+        {
+            Transition target = new(targetScene, self.entryGateName);
+            try
+            {
+                OnBeginSceneTransition?.Invoke(target);
+            }
+            catch (Exception e)
+            {
+                LogError($"Error invoking OnBeginSceneTransition with parameter {target}:\n{e}");
+            }
+            self.entryGateName = target.GateName;
+            orig(self, target.SceneName);
         }
 
         internal static string GetValue(this IString source)
