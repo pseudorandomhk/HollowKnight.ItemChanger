@@ -3,7 +3,7 @@
     /// <summary>
     /// Module which prevents glitches from diving into a bot -> non-top transition.
     /// </summary>
-    [DefaultModule]
+    //[DefaultModule] // Disable by default to preserve dive invuln
     public class HorizontalTransitionQuakeCancel : Module
     {
         public override void Initialize()
