@@ -1,6 +1,7 @@
 ﻿using HutongGames.PlayMaker.Actions;
 using ItemChanger.Extensions;
 using ItemChanger.FsmStateActions;
+using Modding;
 using SD = ItemChanger.Util.SceneDataUtil;
 
 namespace ItemChanger.Modules
@@ -568,6 +569,15 @@ namespace ItemChanger.Modules
                         {
                             if (u.name.StartsWith("Mask")) u.gameObject.SetActive(false);
                         }
+                    }
+                    break;
+                case SceneNames.Waterways_13:
+                    if (t.GateName == "left2" && !PlayerData.instance.GetBool(nameof(PlayerData.hasAcidArmour)))
+                    {
+                        var respawnMarker = newScene.FindGameObject("left2/Hazard Respawn Marker").GetComponent<HazardRespawnMarker>();
+                        Vector2 respawnPosition = new(1.2f, 16.4f);
+                        respawnMarker.transform.SetPosition2D(respawnPosition);
+                        ReflectionHelper.SetField<HazardRespawnMarker, Vector2>(respawnMarker, "heroSpawnLocation", respawnPosition);
                     }
                     break;
                 case SceneNames.White_Palace_03_hub:
