@@ -1,5 +1,6 @@
 ﻿using HutongGames.PlayMaker.Actions;
 using ItemChanger.Extensions;
+using ItemChanger.FsmStateActions;
 #pragma warning disable IDE1006 // Naming Styles
 
 namespace ItemChanger.Modules
@@ -25,6 +26,7 @@ namespace ItemChanger.Modules
             Modding.ModHooks.SetPlayerBoolHook += SkillBoolSetOverride;
             Events.AddFsmEdit(SceneNames.Crossroads_45, new("Miner", "Leave"), SetMylaDeathCondition);
             Events.AddFsmEdit(SceneNames.Crossroads_45, new("Zombie Myla", "FSM"), SetMylaDeathCondition);
+            Events.AddFsmEdit(new("Knight", "Superdash"), CheckMidSuperdashTurnAroundDirection);
             //On.DeactivateIfPlayerdataTrue.OnEnable += SetMylaDeathCondition;
             //On.DeactivateIfPlayerdataFalse.OnEnable += SetMylaDeathCondition;
         }
@@ -39,6 +41,7 @@ namespace ItemChanger.Modules
             Modding.ModHooks.SetPlayerBoolHook -= SkillBoolSetOverride;
             Events.RemoveFsmEdit(SceneNames.Crossroads_45, new("Miner", "Leave"), SetMylaDeathCondition);
             Events.RemoveFsmEdit(SceneNames.Crossroads_45, new("Zombie Myla", "FSM"), SetMylaDeathCondition);
+            Events.RemoveFsmEdit(new("Knight", "Superdash"), CheckMidSuperdashTurnAroundDirection);
             //On.DeactivateIfPlayerdataTrue.OnEnable -= SetMylaDeathCondition;
             //On.DeactivateIfPlayerdataFalse.OnEnable -= SetMylaDeathCondition;
         }
@@ -140,35 +143,18 @@ namespace ItemChanger.Modules
             }
         }
 
-        //private void SetMylaDeathCondition(On.DeactivateIfPlayerdataTrue.orig_OnEnable orig, DeactivateIfPlayerdataTrue self)
-        //{
-        //    if (self.gameObject.scene.name == SceneNames.Crossroads_45 && self.boolName == nameof(PlayerData.hasSuperDash))
-        //    {
-        //        self.boolName = MylaDeathHandling switch
-        //        {
-        //            MylaDeathCondition.DieAfterFullSuperdash => nameof(hasSuperdashBoth),
-        //            MylaDeathCondition.DieAfterRightSuperdash => nameof(hasSuperdashRight),
-        //            MylaDeathCondition.DieAfterLeftSuperdash => nameof(hasSuperdashLeft),
-        //            MylaDeathCondition.DieAfterEitherSuperdash => nameof(hasSuperdashAny),
-        //            _ => nameof(PlayerData.canSuperDash),
-        //        };
-        //    }
-        //    orig(self);
-        //}
-        //private void SetMylaDeathCondition(On.DeactivateIfPlayerdataFalse.orig_OnEnable orig, DeactivateIfPlayerdataFalse self)
-        //{
-        //    if (self.gameObject.scene.name == SceneNames.Crossroads_45 && self.boolName == nameof(PlayerData.hasSuperDash))
-        //    {
-        //        self.boolName = MylaDeathHandling switch
-        //        {
-        //            MylaDeathCondition.DieAfterFullSuperdash => nameof(hasSuperdashBoth),
-        //            MylaDeathCondition.DieAfterRightSuperdash => nameof(hasSuperdashRight),
-        //            MylaDeathCondition.DieAfterLeftSuperdash => nameof(hasSuperdashLeft),
-        //            MylaDeathCondition.DieAfterEitherSuperdash => nameof(hasSuperdashAny),
-        //            _ => nameof(PlayerData.canSuperDash),
-        //        };
-        //    }
-        //    orig(self);
-        //}
+        private void CheckMidSuperdashTurnAroundDirection(PlayMakerFSM fsm)
+        {
+            LambdaEveryFrame directionCheck = new(() =>
+            {
+                if (HeroController.instance.cState.facingRight && !hasSuperdashRight && !hasSuperdashBoth
+                    || !HeroController.instance.cState.facingRight && !hasSuperdashLeft && !hasSuperdashBoth)
+                {
+                    fsm.SendEvent("SLOPE CANCEL");
+                }
+            });
+            fsm.GetState("Dashing").AddLastAction(directionCheck);
+            fsm.GetState("Cancelable").AddLastAction(directionCheck);
+        }
     }
 }
