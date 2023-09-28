@@ -514,7 +514,6 @@ namespace ItemChanger
                         {
                             LogError($"Error invoking OnTransitionOverride with parameters {source}, {origTarget}, {modified}:\n{e}");
                         }
-                        Log($"Overrode transition {source.SceneName}[{source.GateName}] from {origTarget.SceneName}[{origTarget.GateName}] to {modified.SceneName}[{modified.GateName}]");
                         target = new(modified.SceneName, modified.GateName);
                     }
                 }

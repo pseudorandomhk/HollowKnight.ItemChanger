@@ -25,12 +25,12 @@ namespace ItemChanger.Modules
                 GameObject newHopper1 = (GameObject)UObject.Instantiate(hopper1, hopper1.transform.parent);
                 GameObject newHopper2 = (GameObject)UObject.Instantiate(hopper2, hopper2.transform.parent);
 
-                PlayMakerFSM hopper1HM = newHopper1.LocateMyFSM("heatlh_manager_enemy");
+                PlayMakerFSM hopper1HM = newHopper1.LocateMyFSM("health_manager_enemy");
                 hopper1HM.FsmVariables.GetFsmInt("Geo Small").Value = 0;
                 hopper1HM.FsmVariables.GetFsmInt("Geo Medium").Value = 0;
                 hopper1HM.FsmVariables.GetFsmInt("Geo Large").Value = 0;
 
-                PlayMakerFSM hopper2HM = newHopper1.LocateMyFSM("heatlh_manager_enemy");
+                PlayMakerFSM hopper2HM = newHopper1.LocateMyFSM("health_manager_enemy");
                 hopper2HM.FsmVariables.GetFsmInt("Geo Small").Value = 0;
                 hopper2HM.FsmVariables.GetFsmInt("Geo Medium").Value = 0;
                 hopper2HM.FsmVariables.GetFsmInt("Geo Large").Value = 0;

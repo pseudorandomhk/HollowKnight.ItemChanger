@@ -441,7 +441,7 @@ namespace ItemChanger.Locations
             menuDown.GetFirstActionOfType<Wait>().time = 0.01f;
             foreach (var a in menuDown.GetActionsOfType<SendEventByName>())
             {
-                if (a.sendEvent.Value == "DOWN")
+                if (a.sendEvent.Value == "DOWN" && a.eventTarget.gameObject.GameObject.Name != "Item Details")
                 {
                     a.sendEvent.Value = "DOWN INSTANT";
                 }
